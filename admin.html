@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NOIR — Admin</title>
+
+<link rel="icon" href="noir.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --black:#050505;
+    --gold:#c8a45d;
+    --white:#f4f0e8;
+    --muted:#77726b;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    min-height:100vh;
+
+    background:
+    radial-gradient(
+        circle at 50% 20%,
+        rgba(200,164,93,.08),
+        transparent 35%
+    ),
+    var(--black);
+
+    color:var(--white);
+
+    font-family:"Montserrat",sans-serif;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:25px;
+}
+
+.login{
+
+    width:100%;
+    max-width:440px;
+
+    padding:55px 40px;
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(255,255,255,.05),
+        rgba(255,255,255,.01)
+    );
+
+    border:1px solid rgba(200,164,93,.18);
+
+    backdrop-filter:blur(25px);
+
+    text-align:center;
+
+    box-shadow:
+    0 30px 100px rgba(0,0,0,.5);
+}
+
+.logo{
+
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:45px;
+
+    letter-spacing:8px;
+
+    color:var(--white);
+
+    margin-bottom:8px;
+}
+
+.subtitle{
+
+    color:var(--gold);
+
+    font-size:7px;
+
+    letter-spacing:4px;
+
+    text-transform:uppercase;
+
+    margin-bottom:45px;
+}
+
+.label{
+
+    display:block;
+
+    text-align:left;
+
+    color:#77726b;
+
+    font-size:8px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    margin-bottom:10px;
+}
+
+input{
+
+    width:100%;
+
+    height:52px;
+
+    background:rgba(255,255,255,.03);
+
+    border:1px solid rgba(255,255,255,.1);
+
+    color:var(--white);
+
+    padding:0 16px;
+
+    outline:none;
+
+    margin-bottom:20px;
+
+    font-family:inherit;
+}
+
+input:focus{
+
+    border-color:var(--gold);
+}
+
+button{
+
+    width:100%;
+
+    height:55px;
+
+    border:1px solid var(--gold);
+
+    background:var(--gold);
+
+    color:#050505;
+
+    font-family:inherit;
+
+    font-size:8px;
+
+    letter-spacing:3px;
+
+    text-transform:uppercase;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+button:hover{
+
+    background:transparent;
+
+    color:var(--gold);
+}
+
+#error{
+
+    color:#b56b5e;
+
+    font-size:8px;
+
+    margin-top:18px;
+
+    display:none;
+}
+
+.back{
+
+    display:block;
+
+    margin-top:25px;
+
+    color:#625e58;
+
+    font-size:8px;
+
+    text-decoration:none;
+
+    letter-spacing:1px;
+}
+
+.back:hover{
+
+    color:var(--gold);
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="login">
+
+<div class="logo">
+NOIR
+</div>
+
+<div class="subtitle">
+Fragrance · Administration
+</div>
+
+
+<form id="loginForm">
+
+<label class="label">
+Admin Email
+</label>
+
+<input
+type="email"
+id="email"
+placeholder="admin@noirfragrance.com"
+required
+>
+
+
+<label class="label">
+Password
+</label>
+
+<input
+type="password"
+id="password"
+placeholder="••••••••"
+required
+>
+
+
+<button type="submit">
+Enter Administration
+</button>
+
+</form>
+
+
+<div id="error">
+Invalid email or password.
+</div>
+
+
+<a
+href="index.html"
+class="back">
+
+← Return to NOIR
+
+</a>
+
+</div>
+
+
+
+<script type="module">
+
+/*
+    Firebase Authentication will be connected here.
+
+    DO NOT put your real password inside this HTML file.
+
+    We will connect Firebase Auth in the next step.
+*/
+
+
+const form =
+document.getElementById("loginForm");
+
+
+form.addEventListener("submit",(event)=>{
+
+    event.preventDefault();
+
+    document.getElementById("error").style.display =
+        "block";
+
+    document.getElementById("error").textContent =
+        "Firebase authentication is not connected yet.";
+
+});
+
+</script>
+
+
+</body>
+
+</html>
