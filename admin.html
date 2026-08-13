@@ -13,7 +13,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link
+href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap"
+rel="stylesheet">
 
 
 <style>
@@ -23,7 +25,6 @@
     --black:#050505;
     --gold:#c8a45d;
     --white:#f4f0e8;
-    --muted:#77726b;
 
 }
 
@@ -73,6 +74,7 @@ body{
     padding:55px 40px;
 
     background:
+
     linear-gradient(
         145deg,
         rgba(255,255,255,.05),
@@ -86,6 +88,7 @@ body{
     text-align:center;
 
     box-shadow:
+
     0 30px 100px rgba(0,0,0,.5);
 
 }
@@ -228,6 +231,19 @@ button:disabled{
 }
 
 
+.success{
+
+    color:var(--gold);
+
+    font-size:8px;
+
+    margin-top:18px;
+
+    display:none;
+
+}
+
+
 .back{
 
     display:block;
@@ -275,7 +291,6 @@ NOIR
 Fragrance · Administration
 
 </div>
-
 
 
 <form id="loginForm">
@@ -339,11 +354,21 @@ Enter Administration
 </form>
 
 
-
 <div id="error"></div>
 
 
-<a href="index.html" class="back">
+<div
+class="success"
+id="success">
+
+Authentication successful.
+
+</div>
+
+
+<a
+href="index.html"
+class="back">
 
 ← Return to NOIR
 
@@ -358,7 +383,7 @@ Enter Administration
 
 
 /* =========================================================
-   FIREBASE
+   FIREBASE IMPORTS
 ========================================================= */
 
 
@@ -388,34 +413,32 @@ from
 
 
 /* =========================================================
-   NOIR FIREBASE CONFIG
+   NOIR FIREBASE CONFIGURATION
 ========================================================= */
 
 
 const firebaseConfig = {
 
     apiKey:
-    "AIzaSyDN5Qlef7d85fa_9bwUDoXWAK5ieZj689",
+    "AIzaSyCCxNTzbQmMIHhi0BO0LpGbWcR4IWW7yQg",
 
     authDomain:
-    "noirfragrance-8ced0.firebaseapp.com",
+    "noirfragrance-7c5e5.firebaseapp.com",
 
     projectId:
-    "noirfragrance-8ced0",
+    "noirfragrance-7c5e5",
 
     storageBucket:
-    "noirfragrance-8ced0.firebasestorage.app",
+    "noirfragrance-7c5e5.firebasestorage.app",
 
     messagingSenderId:
-    "145638482773",
+    "162914791523",
 
     appId:
-    "1:145638482773:web:7bda6aeb879bb0afb1c5dc",
-
-    measurementId:
-    "G-32G9NZFQD2"
+    "1:162914791523:web:ef39fe95d1f7312a71c856"
 
 };
+
 
 
 /* =========================================================
@@ -449,12 +472,16 @@ const password =
 document.getElementById("password");
 
 
-const button =
+const loginButton =
 document.getElementById("loginButton");
 
 
 const error =
 document.getElementById("error");
+
+
+const success =
+document.getElementById("success");
 
 
 
@@ -463,43 +490,80 @@ document.getElementById("error");
 ========================================================= */
 
 
-form.addEventListener("submit", async (event)=>{
+form.addEventListener(
+"submit",
+async (event)=>{
+
 
     event.preventDefault();
 
 
-    error.style.display = "none";
+    error.style.display =
+        "none";
 
 
-    button.disabled = true;
+    success.style.display =
+        "none";
 
-    button.textContent = "AUTHENTICATING...";
+
+    loginButton.disabled =
+        true;
+
+
+    loginButton.textContent =
+        "AUTHENTICATING...";
 
 
     try{
 
 
-        await signInWithEmailAndPassword(
+        const userCredential =
+            await signInWithEmailAndPassword(
 
-            auth,
+                auth,
 
-            email.value.trim(),
+                email.value.trim(),
 
-            password.value
+                password.value
 
+            );
+
+
+        console.log(
+            "Admin authenticated:",
+            userCredential.user.email
         );
 
 
-        /*
-            Login successful.
+        success.style.display =
+            "block";
 
-            For now we'll send you to the
-            admin dashboard page.
+
+        success.textContent =
+            "Authentication successful.";
+
+
+        loginButton.textContent =
+            "ACCESS GRANTED";
+
+
+        /*
+            We will create admin-dashboard.html
+            next.
+
+            Once it exists, change this to:
+
+            window.location.href =
+                "admin-dashboard.html";
         */
 
 
-        window.location.href =
-            "admin-dashboard.html";
+        setTimeout(()=>{
+
+            window.location.href =
+                "admin-dashboard.html";
+
+        },800);
 
 
     }
@@ -508,47 +572,95 @@ form.addEventListener("submit", async (event)=>{
     catch(err){
 
 
-        console.error(err);
+        console.error(
+            "Firebase Login Error:",
+            err
+        );
 
 
-        error.style.display = "block";
+        error.style.display =
+            "block";
 
 
         if(
-
             err.code ===
             "auth/invalid-credential"
-
         ){
 
             error.textContent =
-            "Invalid admin email or password.";
+                "Invalid admin email or password.";
 
         }
+
 
         else if(
-
             err.code ===
-            "auth/too-many-requests"
-
+            "auth/user-not-found"
         ){
 
             error.textContent =
-            "Too many attempts. Please try again later.";
+                "Admin account was not found.";
 
         }
+
+
+        else if(
+            err.code ===
+            "auth/wrong-password"
+        ){
+
+            error.textContent =
+                "Incorrect password.";
+
+        }
+
+
+        else if(
+            err.code ===
+            "auth/invalid-api-key"
+        ){
+
+            error.textContent =
+                "Firebase API configuration is invalid.";
+
+        }
+
+
+        else if(
+            err.code ===
+            "auth/operation-not-allowed"
+        ){
+
+            error.textContent =
+                "Email/password authentication is not enabled in Firebase.";
+
+        }
+
+
+        else if(
+            err.code ===
+            "auth/too-many-requests"
+        ){
+
+            error.textContent =
+                "Too many attempts. Please try again later.";
+
+        }
+
 
         else{
 
             error.textContent =
-            "Unable to sign in. Please check your details.";
+                "Unable to sign in. Check Firebase settings.";
 
         }
 
 
-        button.disabled = false;
+        loginButton.disabled =
+            false;
 
-        button.textContent =
+
+        loginButton.textContent =
             "ENTER ADMINISTRATION";
 
     }
