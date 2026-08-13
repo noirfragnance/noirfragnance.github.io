@@ -6,25 +6,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NOIR — Admin</title>
+<title>NOIR — Administration</title>
 
 <link rel="icon" href="noir.png">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 
 <style>
 
 :root{
+
     --black:#050505;
     --gold:#c8a45d;
     --white:#f4f0e8;
     --muted:#77726b;
+
 }
 
 *{
+
     margin:0;
     padding:0;
     box-sizing:border-box;
+
 }
 
 body{
@@ -32,27 +40,34 @@ body{
     min-height:100vh;
 
     background:
+
     radial-gradient(
         circle at 50% 20%,
-        rgba(200,164,93,.08),
+        rgba(200,164,93,.09),
         transparent 35%
     ),
-    var(--black);
+
+    #050505;
 
     color:var(--white);
 
     font-family:"Montserrat",sans-serif;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     padding:25px;
+
 }
+
 
 .login{
 
     width:100%;
+
     max-width:440px;
 
     padding:55px 40px;
@@ -72,20 +87,22 @@ body{
 
     box-shadow:
     0 30px 100px rgba(0,0,0,.5);
+
 }
+
 
 .logo{
 
     font-family:"Cormorant Garamond",serif;
 
-    font-size:45px;
+    font-size:48px;
 
     letter-spacing:8px;
 
-    color:var(--white);
+    margin-bottom:7px;
 
-    margin-bottom:8px;
 }
+
 
 .subtitle{
 
@@ -98,7 +115,9 @@ body{
     text-transform:uppercase;
 
     margin-bottom:45px;
+
 }
+
 
 .label{
 
@@ -114,8 +133,10 @@ body{
 
     text-transform:uppercase;
 
-    margin-bottom:10px;
+    margin-bottom:9px;
+
 }
+
 
 input{
 
@@ -136,12 +157,16 @@ input{
     margin-bottom:20px;
 
     font-family:inherit;
+
 }
+
 
 input:focus{
 
     border-color:var(--gold);
+
 }
+
 
 button{
 
@@ -166,14 +191,27 @@ button{
     cursor:pointer;
 
     transition:.3s;
+
 }
+
 
 button:hover{
 
     background:transparent;
 
     color:var(--gold);
+
 }
+
+
+button:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+
+}
+
 
 #error{
 
@@ -183,8 +221,12 @@ button:hover{
 
     margin-top:18px;
 
+    line-height:1.6;
+
     display:none;
+
 }
+
 
 .back{
 
@@ -199,12 +241,16 @@ button:hover{
     text-decoration:none;
 
     letter-spacing:1px;
+
 }
+
 
 .back:hover{
 
     color:var(--gold);
+
 }
+
 
 </style>
 
@@ -216,60 +262,93 @@ button:hover{
 
 <div class="login">
 
+
 <div class="logo">
+
 NOIR
+
 </div>
 
+
 <div class="subtitle">
+
 Fragrance · Administration
+
 </div>
+
 
 
 <form id="loginForm">
 
+
 <label class="label">
+
 Admin Email
+
 </label>
 
+
 <input
+
 type="email"
+
 id="email"
-placeholder="admin@noirfragrance.com"
+
+placeholder="admin@email.com"
+
 required
+
+autocomplete="username"
+
 >
 
 
 <label class="label">
+
 Password
+
 </label>
 
+
 <input
+
 type="password"
+
 id="password"
+
 placeholder="••••••••"
+
 required
+
+autocomplete="current-password"
+
 >
 
 
-<button type="submit">
+<button
+
+type="submit"
+
+id="loginButton">
+
 Enter Administration
+
 </button>
+
 
 </form>
 
 
-<div id="error">
-Invalid email or password.
-</div>
+
+<div id="error"></div>
 
 
-<a
-href="index.html"
-class="back">
+<a href="index.html" class="back">
 
 ← Return to NOIR
 
 </a>
+
 
 </div>
 
@@ -277,28 +356,202 @@ class="back">
 
 <script type="module">
 
-/*
-    Firebase Authentication will be connected here.
 
-    DO NOT put your real password inside this HTML file.
+/* =========================================================
+   FIREBASE
+========================================================= */
 
-    We will connect Firebase Auth in the next step.
-*/
+
+import {
+
+    initializeApp
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+
+
+import {
+
+    getAuth,
+
+    signInWithEmailAndPassword
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+
+
+
+/* =========================================================
+   NOIR FIREBASE CONFIG
+========================================================= */
+
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyDN5Qlef7d85fa_9bwUDoXWAK5ieZj689",
+
+    authDomain:
+    "noirfragrance-8ced0.firebaseapp.com",
+
+    projectId:
+    "noirfragrance-8ced0",
+
+    storageBucket:
+    "noirfragrance-8ced0.firebasestorage.app",
+
+    messagingSenderId:
+    "145638482773",
+
+    appId:
+    "1:145638482773:web:7bda6aeb879bb0afb1c5dc",
+
+    measurementId:
+    "G-32G9NZFQD2"
+
+};
+
+
+/* =========================================================
+   INITIALIZE FIREBASE
+========================================================= */
+
+
+const app =
+initializeApp(firebaseConfig);
+
+
+const auth =
+getAuth(app);
+
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
 
 
 const form =
 document.getElementById("loginForm");
 
 
-form.addEventListener("submit",(event)=>{
+const email =
+document.getElementById("email");
+
+
+const password =
+document.getElementById("password");
+
+
+const button =
+document.getElementById("loginButton");
+
+
+const error =
+document.getElementById("error");
+
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+
+form.addEventListener("submit", async (event)=>{
 
     event.preventDefault();
 
-    document.getElementById("error").style.display =
-        "block";
 
-    document.getElementById("error").textContent =
-        "Firebase authentication is not connected yet.";
+    error.style.display = "none";
+
+
+    button.disabled = true;
+
+    button.textContent = "AUTHENTICATING...";
+
+
+    try{
+
+
+        await signInWithEmailAndPassword(
+
+            auth,
+
+            email.value.trim(),
+
+            password.value
+
+        );
+
+
+        /*
+            Login successful.
+
+            For now we'll send you to the
+            admin dashboard page.
+        */
+
+
+        window.location.href =
+            "admin-dashboard.html";
+
+
+    }
+
+
+    catch(err){
+
+
+        console.error(err);
+
+
+        error.style.display = "block";
+
+
+        if(
+
+            err.code ===
+            "auth/invalid-credential"
+
+        ){
+
+            error.textContent =
+            "Invalid admin email or password.";
+
+        }
+
+        else if(
+
+            err.code ===
+            "auth/too-many-requests"
+
+        ){
+
+            error.textContent =
+            "Too many attempts. Please try again later.";
+
+        }
+
+        else{
+
+            error.textContent =
+            "Unable to sign in. Please check your details.";
+
+        }
+
+
+        button.disabled = false;
+
+        button.textContent =
+            "ENTER ADMINISTRATION";
+
+    }
 
 });
 
