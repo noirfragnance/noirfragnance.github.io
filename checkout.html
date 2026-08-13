@@ -1,26 +1,22 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Checkout — NOIR FRAGRANCE</title>
-
 <link rel="icon" href="noir.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-
 :root{
     --black:#050505;
     --gold:#c8a45d;
     --white:#f4f0e8;
-    --muted:#817c75;
     --border:rgba(255,255,255,.09);
     --serif:"Cormorant Garamond",serif;
     --sans:"Montserrat",sans-serif;
@@ -32,12 +28,17 @@
     box-sizing:border-box;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     background:
     radial-gradient(circle at 80% 10%,rgba(200,164,93,.08),transparent 30%),
     var(--black);
     color:var(--white);
     font-family:var(--sans);
+    overflow-x:hidden;
 }
 
 a{
@@ -58,6 +59,7 @@ header{
     padding:21px 6%;
     background:rgba(5,5,5,.82);
     backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
     border-bottom:1px solid rgba(255,255,255,.06);
 }
 
@@ -94,6 +96,7 @@ nav{
 .logo-name{
     display:flex;
     flex-direction:column;
+    line-height:1;
 }
 
 .logo-name strong{
@@ -111,6 +114,7 @@ nav{
 
 .nav-links{
     display:flex;
+    align-items:center;
     gap:34px;
     list-style:none;
 }
@@ -120,6 +124,11 @@ nav{
     font-size:9px;
     letter-spacing:2px;
     text-transform:uppercase;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:var(--gold);
 }
 
 .cart-link{
@@ -134,6 +143,7 @@ nav{
     border:0;
     color:white;
     font-size:25px;
+    cursor:pointer;
 }
 
 .checkout-page{
@@ -152,6 +162,7 @@ nav{
     color:var(--gold);
     font-size:9px;
     letter-spacing:5px;
+    text-transform:uppercase;
     margin-bottom:18px;
 }
 
@@ -187,6 +198,7 @@ nav{
     color:var(--gold);
     font-size:8px;
     letter-spacing:4px;
+    text-transform:uppercase;
     margin-bottom:10px;
 }
 
@@ -230,6 +242,13 @@ nav{
     color:white;
     padding:15px;
     font-size:10px;
+    transition:.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus{
+    border-color:rgba(200,164,93,.7);
 }
 
 .form-group textarea{
@@ -239,12 +258,17 @@ nav{
 
 .form-group select option{
     background:#0b0b0b;
+    color:white;
 }
 
 .payment-options{
     display:flex;
     flex-direction:column;
     gap:12px;
+}
+
+.payment-option{
+    position:relative;
 }
 
 .payment-option input{
@@ -258,7 +282,13 @@ nav{
     gap:16px;
     padding:20px;
     border:1px solid rgba(255,255,255,.09);
+    background:rgba(255,255,255,.02);
     cursor:pointer;
+    transition:.3s;
+}
+
+.payment-label:hover{
+    border-color:rgba(200,164,93,.45);
 }
 
 .payment-option input:checked + .payment-label{
@@ -295,6 +325,7 @@ nav{
 .payment-description{
     color:#6f6a63;
     font-size:8px;
+    line-height:1.6;
 }
 
 .payment-badge{
@@ -346,6 +377,7 @@ nav{
     width:65px;
     height:70px;
     object-fit:contain;
+    background:rgba(255,255,255,.02);
 }
 
 .summary-info{
@@ -355,6 +387,7 @@ nav{
 .summary-name{
     font-family:var(--serif);
     font-size:21px;
+    line-height:1;
 }
 
 .summary-size{
@@ -382,6 +415,7 @@ nav{
     border-bottom:0;
     color:white;
     font-size:14px;
+    padding-top:22px;
 }
 
 .place-order{
@@ -392,9 +426,16 @@ nav{
     color:#050505;
     margin-top:20px;
     font-size:8px;
+    font-weight:600;
     letter-spacing:3px;
     text-transform:uppercase;
     cursor:pointer;
+    transition:.35s;
+}
+
+.place-order:hover{
+    background:transparent;
+    color:var(--gold);
 }
 
 .place-order:disabled{
@@ -406,6 +447,30 @@ nav{
     display:none;
     text-align:center;
     padding:100px 25px;
+    border:1px solid var(--border);
+}
+
+.empty-checkout h2{
+    font-family:var(--serif);
+    font-size:55px;
+    font-weight:500;
+    margin-bottom:15px;
+}
+
+.empty-checkout p{
+    color:#77726b;
+    font-size:9px;
+    margin-bottom:30px;
+}
+
+.empty-checkout a{
+    display:inline-block;
+    padding:15px 30px;
+    border:1px solid var(--gold);
+    color:var(--gold);
+    font-size:8px;
+    letter-spacing:2px;
+    text-transform:uppercase;
 }
 
 footer{
@@ -467,8 +532,11 @@ footer p{
         height:100vh;
         padding:110px 35px;
         flex-direction:column;
-        background:#050505;
+        align-items:flex-start;
+        gap:27px;
+        background:rgba(5,5,5,.98);
         transition:.4s;
+        border-left:1px solid rgba(200,164,93,.15);
     }
 
     .nav-links.active{
@@ -485,6 +553,10 @@ footer p{
         padding:135px 5% 80px;
     }
 
+    .checkout-hero h1{
+        font-size:60px;
+    }
+
     .checkout-card,
     .order-summary{
         padding:25px 20px;
@@ -499,48 +571,56 @@ footer p{
     }
 }
 
-</style>
+@media(max-width:480px){
 
+    .logo-mark{
+        width:36px;
+        height:36px;
+    }
+
+    .logo-name strong{
+        font-size:20px;
+    }
+
+    .checkout-hero h1{
+        font-size:52px;
+    }
+}
+</style>
 </head>
 
 <body>
 
 <header>
-
 <nav>
 
 <a href="index.html" class="logo">
+    <div class="logo-mark">
+        <span>N</span>
+    </div>
 
-<div class="logo-mark">
-<span>N</span>
-</div>
-
-<div class="logo-name">
-<strong>NOIR</strong>
-<small>FRAGRANCE</small>
-</div>
-
+    <div class="logo-name">
+        <strong>NOIR</strong>
+        <small>FRAGRANCE</small>
+    </div>
 </a>
 
 <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="shop.html">Shop</a></li>
+    <li><a href="about.html">Our Story</a></li>
+    <li><a href="contact.html">Contact</a></li>
 
-<li><a href="index.html">Home</a></li>
-<li><a href="shop.html">Shop</a></li>
-<li><a href="about.html">Our Story</a></li>
-<li><a href="contact.html">Contact</a></li>
-
-<li>
-<a href="cart.html" class="cart-link">
-Cart <span id="cartCount">(0)</span>
-</a>
-</li>
-
+    <li>
+        <a href="cart.html" class="cart-link">
+            Cart <span id="cartCount">(0)</span>
+        </a>
+    </li>
 </ul>
 
 <button class="menu-button" id="menuButton">☰</button>
 
 </nav>
-
 </header>
 
 
@@ -548,266 +628,274 @@ Cart <span id="cartCount">(0)</span>
 
 <section class="checkout-hero">
 
-<div class="eyebrow">
-SECURE CHECKOUT
-</div>
+    <div class="eyebrow">
+        SECURE CHECKOUT
+    </div>
 
-<h1>Complete Your Order</h1>
+    <h1>Complete Your Order</h1>
 
-<p>Your NOIR selection is almost yours.</p>
+    <p>Your NOIR selection is almost yours.</p>
 
 </section>
 
 
 <section class="empty-checkout" id="emptyCheckout">
 
-<h2>Your cart is empty.</h2>
+    <h2>Your cart is empty.</h2>
 
-<p>Please select a fragrance before continuing.</p>
+    <p>Please select a fragrance before continuing.</p>
 
-<a href="shop.html">Explore Collection</a>
+    <a href="shop.html">Explore Collection</a>
 
 </section>
 
 
 <section class="checkout-layout" id="checkoutLayout">
 
-
 <div>
 
 <section class="checkout-card">
 
-<div class="card-eyebrow">
-01 · DELIVERY
-</div>
+    <div class="card-eyebrow">
+        01 · DELIVERY
+    </div>
 
-<h2 class="card-title">
-Your Details
-</h2>
+    <h2 class="card-title">
+        Your Details
+    </h2>
 
-<div class="form-grid">
+    <div class="form-grid">
 
-<div class="form-group">
+        <div class="form-group">
+            <label for="fullName">Full Name</label>
 
-<label>Full Name</label>
+            <input
+                type="text"
+                id="fullName"
+                placeholder="Your full name"
+                autocomplete="name"
+                required>
+        </div>
 
-<input
-type="text"
-id="fullName"
-placeholder="Your full name"
-required>
 
-</div>
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
 
-<div class="form-group">
+            <input
+                type="tel"
+                id="phone"
+                placeholder="03XX XXXXXXX"
+                autocomplete="tel"
+                required>
+        </div>
 
-<label>Phone Number</label>
 
-<input
-type="tel"
-id="phone"
-placeholder="03XX XXXXXXX"
-required>
+        <div class="form-group">
+            <label for="email">Email Address</label>
 
-</div>
+            <input
+                type="email"
+                id="email"
+                placeholder="you@example.com"
+                autocomplete="email">
+        </div>
 
-<div class="form-group">
 
-<label>Email Address</label>
+        <div class="form-group">
+            <label for="city">City</label>
 
-<input
-type="email"
-id="email"
-placeholder="you@example.com">
+            <select id="city" required>
 
-</div>
+                <option value="">Select city</option>
+                <option>Lahore</option>
+                <option>Karachi</option>
+                <option>Islamabad</option>
+                <option>Rawalpindi</option>
+                <option>Faisalabad</option>
+                <option>Multan</option>
+                <option>Gujranwala</option>
+                <option>Peshawar</option>
+                <option>Quetta</option>
+                <option>Sialkot</option>
+                <option>Bahawalpur</option>
+                <option>Burewala</option>
+                <option>Other</option>
 
-<div class="form-group">
+            </select>
+        </div>
 
-<label>City</label>
 
-<select id="city" required>
+        <div class="form-group full">
 
-<option value="">Select city</option>
-<option>Lahore</option>
-<option>Karachi</option>
-<option>Islamabad</option>
-<option>Rawalpindi</option>
-<option>Faisalabad</option>
-<option>Multan</option>
-<option>Gujranwala</option>
-<option>Peshawar</option>
-<option>Quetta</option>
-<option>Sialkot</option>
-<option>Bahawalpur</option>
-<option>Burewala</option>
-<option>Other</option>
+            <label for="address">
+                Complete Delivery Address
+            </label>
 
-</select>
+            <textarea
+                id="address"
+                placeholder="House / Flat number, street, area..."
+                required></textarea>
 
-</div>
+        </div>
 
-<div class="form-group full">
-
-<label>Complete Delivery Address</label>
-
-<textarea
-id="address"
-placeholder="House / Flat number, street, area..."
-required></textarea>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
 
 <section class="checkout-card">
 
-<div class="card-eyebrow">
-02 · PAYMENT
-</div>
+    <div class="card-eyebrow">
+        02 · PAYMENT
+    </div>
 
-<h2 class="card-title">
-Payment Method
-</h2>
-
-<div class="payment-options">
-
-<div class="payment-option">
-
-<input
-type="radio"
-name="payment"
-id="cod"
-value="COD"
-checked>
-
-<label for="cod" class="payment-label">
-
-<span class="payment-radio"></span>
-
-<span class="payment-info">
-
-<span class="payment-name">
-Cash on Delivery
-</span>
-
-<span class="payment-description">
-Pay when your fragrance arrives.
-</span>
-
-</span>
-
-<span class="payment-badge">
-COD
-</span>
-
-</label>
-
-</div>
+    <h2 class="card-title">
+        Payment Method
+    </h2>
 
 
-<div class="payment-option">
+    <div class="payment-options">
 
-<input
-type="radio"
-name="payment"
-id="jazzcash"
-value="JazzCash">
+        <div class="payment-option">
 
-<label for="jazzcash" class="payment-label">
+            <input
+                type="radio"
+                name="payment"
+                id="cod"
+                value="COD"
+                checked>
 
-<span class="payment-radio"></span>
+            <label for="cod" class="payment-label">
 
-<span class="payment-info">
+                <span class="payment-radio"></span>
 
-<span class="payment-name">
-JazzCash
-</span>
+                <span class="payment-info">
 
-<span class="payment-description">
-Online payment gateway.
-</span>
+                    <span class="payment-name">
+                        Cash on Delivery
+                    </span>
 
-</span>
+                    <span class="payment-description">
+                        Pay when your fragrance arrives.
+                    </span>
 
-<span class="payment-badge">JC</span>
+                </span>
 
-</label>
+                <span class="payment-badge">
+                    COD
+                </span>
 
-</div>
+            </label>
 
-
-<div class="payment-option">
-
-<input
-type="radio"
-name="payment"
-id="easypaisa"
-value="Easypaisa">
-
-<label for="easypaisa" class="payment-label">
-
-<span class="payment-radio"></span>
-
-<span class="payment-info">
-
-<span class="payment-name">
-Easypaisa
-</span>
-
-<span class="payment-description">
-Online payment gateway.
-</span>
-
-</span>
-
-<span class="payment-badge">EP</span>
-
-</label>
-
-</div>
+        </div>
 
 
-<div class="payment-option">
+        <div class="payment-option">
 
-<input
-type="radio"
-name="payment"
-id="card"
-value="Card">
+            <input
+                type="radio"
+                name="payment"
+                id="jazzcash"
+                value="JazzCash">
 
-<label for="card" class="payment-label">
+            <label for="jazzcash" class="payment-label">
 
-<span class="payment-radio"></span>
+                <span class="payment-radio"></span>
 
-<span class="payment-info">
+                <span class="payment-info">
 
-<span class="payment-name">
-Debit / Credit Card
-</span>
+                    <span class="payment-name">
+                        JazzCash
+                    </span>
 
-<span class="payment-description">
-Secure online card payment.
-</span>
+                    <span class="payment-description">
+                        Online payment gateway.
+                    </span>
 
-</span>
+                </span>
 
-<span class="payment-badge">CARD</span>
+                <span class="payment-badge">
+                    JC
+                </span>
 
-</label>
+            </label>
 
-</div>
+        </div>
 
-</div>
 
-<div class="payment-notice" id="paymentNotice">
+        <div class="payment-option">
 
-Cash on Delivery selected. You will pay the courier when your order arrives.
+            <input
+                type="radio"
+                name="payment"
+                id="easypaisa"
+                value="Easypaisa">
 
-</div>
+            <label for="easypaisa" class="payment-label">
+
+                <span class="payment-radio"></span>
+
+                <span class="payment-info">
+
+                    <span class="payment-name">
+                        Easypaisa
+                    </span>
+
+                    <span class="payment-description">
+                        Online payment gateway.
+                    </span>
+
+                </span>
+
+                <span class="payment-badge">
+                    EP
+                </span>
+
+            </label>
+
+        </div>
+
+
+        <div class="payment-option">
+
+            <input
+                type="radio"
+                name="payment"
+                id="card"
+                value="Card">
+
+            <label for="card" class="payment-label">
+
+                <span class="payment-radio"></span>
+
+                <span class="payment-info">
+
+                    <span class="payment-name">
+                        Debit / Credit Card
+                    </span>
+
+                    <span class="payment-description">
+                        Secure online card payment.
+                    </span>
+
+                </span>
+
+                <span class="payment-badge">
+                    CARD
+                </span>
+
+            </label>
+
+        </div>
+
+    </div>
+
+
+    <div class="payment-notice" id="paymentNotice">
+
+        Cash on Delivery selected. You will pay the courier when your order arrives.
+
+    </div>
 
 </section>
 
@@ -816,51 +904,56 @@ Cash on Delivery selected. You will pay the courier when your order arrives.
 
 <aside class="order-summary">
 
-<div class="card-eyebrow">
-03 · YOUR ORDER
-</div>
+    <div class="card-eyebrow">
+        03 · YOUR ORDER
+    </div>
 
-<h2 class="summary-title">
-Order Summary
-</h2>
+    <h2 class="summary-title">
+        Order Summary
+    </h2>
 
-<div class="summary-items" id="summaryItems"></div>
+    <div class="summary-items" id="summaryItems"></div>
 
-<div class="summary-row">
 
-<span>Items</span>
-<span id="itemCount">0</span>
+    <div class="summary-row">
 
-</div>
+        <span>Items</span>
+        <span id="itemCount">0</span>
 
-<div class="summary-row">
+    </div>
 
-<span>Subtotal</span>
-<span id="subtotal">Rs. 0</span>
 
-</div>
+    <div class="summary-row">
 
-<div class="summary-row">
+        <span>Subtotal</span>
+        <span id="subtotal">Rs. 0</span>
 
-<span>Delivery</span>
-<span id="delivery">Rs. 250</span>
+    </div>
 
-</div>
 
-<div class="summary-row total">
+    <div class="summary-row">
 
-<span>Total</span>
-<span id="total">Rs. 250</span>
+        <span>Delivery</span>
+        <span id="delivery">Rs. 250</span>
 
-</div>
+    </div>
 
-<button
-class="place-order"
-id="placeOrder">
 
-Place Order
+    <div class="summary-row total">
 
-</button>
+        <span>Total</span>
+        <span id="total">Rs. 250</span>
+
+    </div>
+
+
+    <button
+        class="place-order"
+        id="placeOrder">
+
+        Place Order
+
+    </button>
 
 </aside>
 
@@ -871,29 +964,33 @@ Place Order
 
 <footer>
 
-<div class="tagline">
-The Art of Presence.
-</div>
+    <div class="tagline">
+        The Art of Presence.
+    </div>
 
-<div class="footer-links">
+    <div class="footer-links">
 
-<a href="index.html">Home</a>
-<a href="shop.html">Shop</a>
-<a href="about.html">Our Story</a>
-<a href="contact.html">Contact</a>
-<a href="privacy.html">Privacy Policy</a>
-<a href="terms.html">Terms & Conditions</a>
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="about.html">Our Story</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms & Conditions</a>
 
-</div>
+    </div>
 
-<p>
-© 2026 NOIR FRAGRANCE. ALL RIGHTS RESERVED.
-</p>
+    <p>
+        © 2026 NOIR FRAGRANCE. ALL RIGHTS RESERVED.
+    </p>
 
 </footer>
 
 
 <script type="module">
+
+/* =========================================================
+   FIREBASE
+========================================================= */
 
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
@@ -912,30 +1009,28 @@ import {
 from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
 
 
-/* ================= FIREBASE ================= */
-
 const firebaseConfig = {
 
     apiKey:
-    "AIzaSyCCxNTzbQmMIHhi0BO0LpGbWcR4IWW7yQg",
+        "AIzaSyCCxNTzbQmMIHhi0BO0LpGbWcR4IWW7yQg",
 
     authDomain:
-    "noirfragrance-7c5e5.firebaseapp.com",
+        "noirfragrance-7c5e5.firebaseapp.com",
 
     databaseURL:
-    "https://noirfragrance-7c5e5-default-rtdb.asia-southeast1.firebasedatabase.app",
+        "https://noirfragrance-7c5e5-default-rtdb.asia-southeast1.firebasedatabase.app",
 
     projectId:
-    "noirfragrance-7c5e5",
+        "noirfragrance-7c5e5",
 
     storageBucket:
-    "noirfragrance-7c5e5.firebasestorage.app",
+        "noirfragrance-7c5e5.firebasestorage.app",
 
     messagingSenderId:
-    "162914791523",
+        "162914791523",
 
     appId:
-    "1:162914791523:web:ef39fe95d1f7312a71c856"
+        "1:162914791523:web:ef39fe95d1f7312a71c856"
 
 };
 
@@ -947,122 +1042,640 @@ const auth = getAuth(app);
 const db = getDatabase(app);
 
 
-/* ================= ANONYMOUS LOGIN ================= */
+/* =========================================================
+   FIREBASE ANONYMOUS AUTHENTICATION
+========================================================= */
 
-let firebaseUser = null;
+let firebaseReady = false;
 
 try {
 
-    const result =
     await signInAnonymously(auth);
 
-    firebaseUser =
-    result.user;
+    firebaseReady = true;
 
     console.log(
-        "Firebase checkout authenticated."
+        "NOIR Firebase authentication successful."
     );
 
 }
 catch(error){
 
     console.error(
-        "Firebase authentication failed:",
+        "Firebase authentication error:",
         error
     );
 
     alert(
-        "Unable to connect to the order system. Please try again."
+        "Order system could not connect to Firebase. Please refresh and try again."
     );
 
 }
 
 
-/* ================= CART ================= */
+/* =========================================================
+   CART
+========================================================= */
 
-let cart =
-JSON.parse(
-    localStorage.getItem("noirCart") || "[]"
-);
+let cart = [];
 
+try {
 
-/* ================= ELEMENTS ================= */
+    cart =
+        JSON.parse(
+            localStorage.getItem("noirCart") || "[]"
+        );
 
-const summaryItems =
-document.getElementById("summaryItems");
+    if(!Array.isArray(cart)){
+        cart = [];
+    }
 
-const itemCount =
-document.getElementById("itemCount");
+}
+catch(error){
 
-const subtotal =
-document.getElementById("subtotal");
+    console.error(
+        "Cart loading error:",
+        error
+    );
 
-const delivery =
-document.getElementById("delivery");
-
-const total =
-document.getElementById("total");
-
-const cartCount =
-document.getElementById("cartCount");
-
-const checkoutLayout =
-document.getElementById("checkoutLayout");
-
-const emptyCheckout =
-document.getElementById("emptyCheckout");
-
-const paymentNotice =
-document.getElementById("paymentNotice");
-
-const DELIVERY_CHARGE = 250;
-
-
-/* ================= PRICE ================= */
-
-function formatPrice(price){
-
-    return "Rs. " +
-    Number(price).toLocaleString();
+    cart = [];
 
 }
 
 
-/* ================= RENDER CART ================= */
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const checkoutLayout =
+    document.getElementById("checkoutLayout");
+
+const emptyCheckout =
+    document.getElementById("emptyCheckout");
+
+const summaryItems =
+    document.getElementById("summaryItems");
+
+const itemCount =
+    document.getElementById("itemCount");
+
+const subtotal =
+    document.getElementById("subtotal");
+
+const delivery =
+    document.getElementById("delivery");
+
+const total =
+    document.getElementById("total");
+
+const cartCount =
+    document.getElementById("cartCount");
+
+const placeOrder =
+    document.getElementById("placeOrder");
+
+const paymentNotice =
+    document.getElementById("paymentNotice");
+
+const DELIVERY_CHARGE = 250;
+
+
+/* =========================================================
+   PRICE FORMAT
+========================================================= */
+
+function formatPrice(price){
+
+    return "Rs. " +
+        Number(price || 0).toLocaleString();
+
+}
+
+
+/* =========================================================
+   RENDER CART
+========================================================= */
 
 function renderOrder(){
 
     if(cart.length === 0){
 
-        checkoutLayout.style.display =
-        "none";
+        checkoutLayout.style.display = "none";
 
-        emptyCheckout.style.display =
-        "block";
+        emptyCheckout.style.display = "block";
+
+        cartCount.textContent = "(0)";
 
         return;
 
     }
 
+
+    checkoutLayout.style.display = "grid";
+
+    emptyCheckout.style.display = "none";
+
     summaryItems.innerHTML = "";
 
-    let count = 0;
+
+    let productsCount = 0;
+
     let subtotalAmount = 0;
 
 
     cart.forEach(item => {
 
         const quantity =
-        Number(item.quantity) || 1;
+            Number(item.quantity) || 1;
 
         const price =
-        Number(item.price) || 0;
+            Number(item.price) || 0;
 
-        count += quantity;
+
+        productsCount += quantity;
 
         subtotalAmount +=
-        price * quantity;
+            price * quantity;
 
 
         const element =
-        document.createElement("div");
+            document.createElement("div");
+
+        element.className =
+            "summary-item";
+
+
+        const image =
+            document.createElement("img");
+
+        image.className =
+            "summary-image";
+
+        image.src =
+            item.image || "noir.png";
+
+        image.alt =
+            item.name || "NOIR Fragrance";
+
+
+        const info =
+            document.createElement("div");
+
+        info.className =
+            "summary-info";
+
+
+        const name =
+            document.createElement("div");
+
+        name.className =
+            "summary-name";
+
+        name.textContent =
+            item.name || "NOIR FRAGRANCE";
+
+
+        const size =
+            document.createElement("div");
+
+        size.className =
+            "summary-size";
+
+        size.textContent =
+            `${item.size || "50 ML"} × ${quantity}`;
+
+
+        const priceElement =
+            document.createElement("div");
+
+        priceElement.className =
+            "summary-price";
+
+        priceElement.textContent =
+            formatPrice(price * quantity);
+
+
+        info.appendChild(name);
+
+        info.appendChild(size);
+
+        info.appendChild(priceElement);
+
+        element.appendChild(image);
+
+        element.appendChild(info);
+
+        summaryItems.appendChild(element);
+
+    });
+
+
+    const totalAmount =
+        subtotalAmount + DELIVERY_CHARGE;
+
+
+    itemCount.textContent =
+        productsCount;
+
+
+    subtotal.textContent =
+        formatPrice(subtotalAmount);
+
+
+    delivery.textContent =
+        formatPrice(DELIVERY_CHARGE);
+
+
+    total.textContent =
+        formatPrice(totalAmount);
+
+
+    cartCount.textContent =
+        `(${productsCount})`;
+
+}
+
+
+renderOrder();
+
+
+/* =========================================================
+   PAYMENT METHOD DISPLAY
+========================================================= */
+
+document
+.querySelectorAll('input[name="payment"]')
+.forEach(radio => {
+
+    radio.addEventListener("change", () => {
+
+        if(radio.value === "COD"){
+
+            paymentNotice.textContent =
+                "Cash on Delivery selected. You will pay the courier when your order arrives.";
+
+        }
+        else if(radio.value === "JazzCash"){
+
+            paymentNotice.textContent =
+                "JazzCash payment gateway will be connected after the NOIR merchant account is activated.";
+
+        }
+        else if(radio.value === "Easypaisa"){
+
+            paymentNotice.textContent =
+                "Easypaisa payment gateway will be connected after the NOIR merchant account is activated.";
+
+        }
+        else if(radio.value === "Card"){
+
+            paymentNotice.textContent =
+                "Debit / Credit Card payment gateway will be connected after the NOIR merchant payment gateway is activated.";
+
+        }
+
+    });
+
+});
+
+
+/* =========================================================
+   PLACE ORDER
+========================================================= */
+
+placeOrder.addEventListener("click", async () => {
+
+    if(cart.length === 0){
+
+        alert(
+            "Your cart is empty."
+        );
+
+        return;
+
+    }
+
+
+    if(!firebaseReady){
+
+        alert(
+            "The order system is not connected. Please refresh the page and try again."
+        );
+
+        return;
+
+    }
+
+
+    const name =
+        document
+        .getElementById("fullName")
+        .value
+        .trim();
+
+
+    const phone =
+        document
+        .getElementById("phone")
+        .value
+        .trim();
+
+
+    const email =
+        document
+        .getElementById("email")
+        .value
+        .trim();
+
+
+    const city =
+        document
+        .getElementById("city")
+        .value;
+
+
+    const address =
+        document
+        .getElementById("address")
+        .value
+        .trim();
+
+
+    const paymentElement =
+        document.querySelector(
+            'input[name="payment"]:checked'
+        );
+
+
+    if(!name || !phone || !city || !address){
+
+        alert(
+            "Please complete your name, phone number, city and delivery address."
+        );
+
+        return;
+
+    }
+
+
+    if(!paymentElement){
+
+        alert(
+            "Please select a payment method."
+        );
+
+        return;
+
+    }
+
+
+    const payment =
+        paymentElement.value;
+
+
+    /*
+       Only COD is live at this stage.
+       Other payment gateways will be connected
+       separately using their official merchant APIs.
+    */
+
+    if(payment !== "COD"){
+
+        alert(
+            `${payment} is not connected yet. Please select Cash on Delivery for now.`
+        );
+
+        return;
+
+    }
+
+
+    let subtotalAmount = 0;
+
+
+    const cleanItems =
+        cart.map(item => {
+
+            const quantity =
+                Number(item.quantity) || 1;
+
+            const price =
+                Number(item.price) || 0;
+
+
+            subtotalAmount +=
+                price * quantity;
+
+
+            return {
+
+                name:
+                    item.name || "NOIR FRAGRANCE",
+
+                price:
+                    price,
+
+                quantity:
+                    quantity,
+
+                size:
+                    item.size || "50 ML",
+
+                image:
+                    item.image || "noir.png"
+
+            };
+
+        });
+
+
+    const totalAmount =
+        subtotalAmount + DELIVERY_CHARGE;
+
+
+    const order = {
+
+        orderId:
+            "NOIR-" +
+            Date.now()
+            .toString(),
+
+        customer: {
+
+            name:
+                name,
+
+            phone:
+                phone,
+
+            email:
+                email,
+
+            city:
+                city,
+
+            address:
+                address
+
+        },
+
+        paymentMethod:
+            payment,
+
+        items:
+            cleanItems,
+
+        subtotal:
+            subtotalAmount,
+
+        delivery:
+            DELIVERY_CHARGE,
+
+        total:
+            totalAmount,
+
+        status:
+            "Pending",
+
+        createdAt:
+            new Date().toISOString()
+
+    };
+
+
+    placeOrder.disabled = true;
+
+    placeOrder.textContent =
+        "Processing...";
+
+
+    try {
+
+        /*
+           THIS IS THE IMPORTANT PART.
+
+           The order is saved inside:
+
+           Realtime Database
+           └── orders
+               └── generated-order-id
+        */
+
+        const ordersRef =
+            ref(db, "orders");
+
+
+        const newOrderRef =
+            await push(
+                ordersRef,
+                order
+            );
+
+
+        console.log(
+            "Order saved successfully:",
+            newOrderRef.key
+        );
+
+
+        /*
+           Save a copy locally so the
+           success page can display it.
+        */
+
+        localStorage.setItem(
+            "noirLastOrder",
+            JSON.stringify({
+
+                ...order,
+
+                firebaseKey:
+                    newOrderRef.key
+
+            })
+        );
+
+
+        /*
+           Clear cart after Firebase
+           confirms the order was saved.
+        */
+
+        localStorage.removeItem(
+            "noirCart"
+        );
+
+
+        /*
+           Go to confirmation page.
+        */
+
+        window.location.href =
+            "order-success.html";
+
+    }
+    catch(error){
+
+        console.error(
+            "ORDER SAVE ERROR:",
+            error
+        );
+
+
+        placeOrder.disabled = false;
+
+        placeOrder.textContent =
+            "Place Order";
+
+
+        alert(
+            "Your order could not be saved. Please try again."
+        );
+
+    }
+
+});
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+const menuButton =
+    document.getElementById("menuButton");
+
+const navLinks =
+    document.getElementById("navLinks");
+
+
+menuButton.addEventListener("click", () => {
+
+    navLinks.classList.toggle("active");
+
+    menuButton.textContent =
+        navLinks.classList.contains("active")
+        ? "✕"
+        : "☰";
+
+});
+
+
+document
+.querySelectorAll(".nav-links a")
+.forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        navLinks.classList.remove("active");
+
+        menuButton.textContent =
+            "☰";
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
