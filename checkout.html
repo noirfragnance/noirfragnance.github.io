@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Checkout — NOIR FRAGRANCE</title>
-
-<meta name="description"
-content="Secure checkout for NOIR FRAGRANCE.">
 
 <link rel="icon" href="noir.png">
 
@@ -18,17 +14,14 @@ content="Secure checkout for NOIR FRAGRANCE.">
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-
 <style>
 
 :root{
     --black:#050505;
-    --dark:#0b0b0b;
     --gold:#c8a45d;
     --white:#f4f0e8;
     --muted:#817c75;
     --border:rgba(255,255,255,.09);
-
     --serif:"Cormorant Garamond",serif;
     --sans:"Montserrat",sans-serif;
 }
@@ -39,25 +32,12 @@ content="Secure checkout for NOIR FRAGRANCE.">
     box-sizing:border-box;
 }
 
-html{
-    scroll-behavior:smooth;
-}
-
 body{
-
     background:
-    radial-gradient(
-        circle at 80% 10%,
-        rgba(200,164,93,.08),
-        transparent 30%
-    ),
+    radial-gradient(circle at 80% 10%,rgba(200,164,93,.08),transparent 30%),
     var(--black);
-
     color:var(--white);
-
     font-family:var(--sans);
-
-    overflow-x:hidden;
 }
 
 a{
@@ -65,962 +45,457 @@ a{
     color:inherit;
 }
 
-button,
-input,
-textarea,
-select{
+button,input,textarea,select{
     font-family:inherit;
 }
 
-
-/* ================= HEADER ================= */
-
 header{
-
     position:fixed;
-
     top:0;
     left:0;
-
     width:100%;
-
     z-index:1000;
-
     padding:21px 6%;
-
-    background:rgba(5,5,5,.78);
-
+    background:rgba(5,5,5,.82);
     backdrop-filter:blur(22px);
-
-    -webkit-backdrop-filter:blur(22px);
-
     border-bottom:1px solid rgba(255,255,255,.06);
 }
 
 nav{
-
     max-width:1450px;
-
     margin:auto;
-
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
 }
 
-
-/* ================= LOGO ================= */
-
 .logo{
-
     display:flex;
-
     align-items:center;
-
     gap:13px;
 }
 
 .logo-mark{
-
     width:42px;
     height:42px;
-
     border:1px solid var(--gold);
-
     display:grid;
-
     place-items:center;
-
     transform:rotate(45deg);
 }
 
 .logo-mark span{
-
     transform:rotate(-45deg);
-
     font-family:var(--serif);
-
     color:var(--gold);
-
     font-size:25px;
 }
 
 .logo-name{
-
     display:flex;
-
     flex-direction:column;
-
-    line-height:1;
 }
 
 .logo-name strong{
-
     font-family:var(--serif);
-
     font-size:24px;
-
     letter-spacing:5px;
 }
 
 .logo-name small{
-
     color:var(--gold);
-
     font-size:7px;
-
     letter-spacing:4px;
-
     margin-top:5px;
 }
 
-
-/* ================= NAV ================= */
-
 .nav-links{
-
     display:flex;
-
-    align-items:center;
-
     gap:34px;
-
     list-style:none;
 }
 
 .nav-links a{
-
     color:#aaa59e;
-
     font-size:9px;
-
     letter-spacing:2px;
-
     text-transform:uppercase;
-
-    transition:.3s;
-}
-
-.nav-links a:hover{
-
-    color:var(--gold);
 }
 
 .cart-link{
-
     border:1px solid rgba(200,164,93,.4);
-
     padding:11px 17px;
-
     color:var(--gold)!important;
 }
 
 .menu-button{
-
     display:none;
-
-    border:0;
-
     background:transparent;
-
-    color:var(--white);
-
+    border:0;
+    color:white;
     font-size:25px;
-
-    cursor:pointer;
 }
-
-
-/* ================= PAGE ================= */
 
 .checkout-page{
-
     max-width:1250px;
-
     margin:auto;
-
-    padding:165px 6% 110px;
+    padding:165px 6% 100px;
 }
 
-
-/* ================= HERO ================= */
-
 .checkout-hero{
-
     text-align:center;
-
-    padding-bottom:60px;
-
+    padding-bottom:55px;
     border-bottom:1px solid var(--border);
 }
 
 .eyebrow{
-
     color:var(--gold);
-
     font-size:9px;
-
     letter-spacing:5px;
-
-    text-transform:uppercase;
-
     margin-bottom:18px;
 }
 
 .checkout-hero h1{
-
     font-family:var(--serif);
-
-    font-size:clamp(65px,8vw,100px);
-
+    font-size:clamp(60px,8vw,100px);
     font-weight:500;
-
     line-height:.8;
-
     margin-bottom:22px;
 }
 
 .checkout-hero p{
-
     color:#77726b;
-
     font-size:10px;
-
-    line-height:1.8;
 }
 
-
-/* ================= LAYOUT ================= */
-
 .checkout-layout{
-
     display:grid;
-
     grid-template-columns:1fr 390px;
-
     gap:35px;
-
     margin-top:60px;
 }
 
-
-/* ================= CARDS ================= */
-
-.checkout-card{
-
+.checkout-card,
+.order-summary{
     border:1px solid var(--border);
-
-    background:
-    linear-gradient(
-        145deg,
-        rgba(255,255,255,.045),
-        rgba(255,255,255,.01)
-    );
-
+    background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.01));
     padding:35px;
-
     margin-bottom:18px;
-
-    backdrop-filter:blur(15px);
-}
-
-.card-title{
-
-    font-family:var(--serif);
-
-    font-size:36px;
-
-    font-weight:500;
-
-    margin-bottom:30px;
 }
 
 .card-eyebrow{
-
     color:var(--gold);
-
     font-size:8px;
-
     letter-spacing:4px;
-
-    text-transform:uppercase;
-
     margin-bottom:10px;
 }
 
-
-/* ================= FORM ================= */
+.card-title{
+    font-family:var(--serif);
+    font-size:36px;
+    font-weight:500;
+    margin-bottom:30px;
+}
 
 .form-grid{
-
     display:grid;
-
     grid-template-columns:1fr 1fr;
-
     gap:16px;
 }
 
 .form-group{
-
     display:flex;
-
     flex-direction:column;
-
     gap:8px;
 }
 
 .form-group.full{
-
     grid-column:1/-1;
 }
 
 .form-group label{
-
     color:#77726b;
-
     font-size:8px;
-
     letter-spacing:2px;
-
     text-transform:uppercase;
 }
 
 .form-group input,
 .form-group textarea,
 .form-group select{
-
     width:100%;
-
     border:1px solid rgba(255,255,255,.1);
-
     outline:none;
-
     background:rgba(255,255,255,.025);
-
-    color:var(--white);
-
+    color:white;
     padding:15px;
-
     font-size:10px;
-
-    transition:.3s;
 }
 
 .form-group textarea{
-
     min-height:105px;
-
     resize:vertical;
 }
 
 .form-group select option{
-
     background:#0b0b0b;
-
-    color:white;
 }
-
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus{
-
-    border-color:rgba(200,164,93,.7);
-
-    box-shadow:0 0 20px rgba(200,164,93,.04);
-}
-
-
-/* ================= PAYMENT ================= */
 
 .payment-options{
-
     display:flex;
-
     flex-direction:column;
-
     gap:12px;
 }
 
-.payment-option{
-
-    position:relative;
-}
-
 .payment-option input{
-
     position:absolute;
-
     opacity:0;
 }
 
 .payment-label{
-
     display:flex;
-
     align-items:center;
-
     gap:16px;
-
     padding:20px;
-
     border:1px solid rgba(255,255,255,.09);
-
-    background:rgba(255,255,255,.02);
-
     cursor:pointer;
-
-    transition:.3s;
-}
-
-.payment-label:hover{
-
-    border-color:rgba(200,164,93,.45);
 }
 
 .payment-option input:checked + .payment-label{
-
     border-color:var(--gold);
-
     background:rgba(200,164,93,.055);
-
-    box-shadow:
-    inset 0 0 0 1px rgba(200,164,93,.15);
 }
 
 .payment-radio{
-
     width:18px;
-
     height:18px;
-
-    border:1px solid #77726b;
-
+    border:1px solid #777;
     border-radius:50%;
-
-    display:grid;
-
-    place-items:center;
-
     flex-shrink:0;
 }
 
-.payment-radio::after{
-
-    content:"";
-
-    width:7px;
-
-    height:7px;
-
-    border-radius:50%;
-
-    background:transparent;
-}
-
 .payment-option input:checked + .payment-label .payment-radio{
-
     border-color:var(--gold);
-}
-
-.payment-option input:checked + .payment-label .payment-radio::after{
-
+    box-shadow:inset 0 0 0 5px #050505;
     background:var(--gold);
 }
 
 .payment-info{
-
     display:flex;
-
     flex-direction:column;
-
     gap:5px;
 }
 
 .payment-name{
-
     font-size:10px;
-
     letter-spacing:1px;
-
     text-transform:uppercase;
 }
 
 .payment-description{
-
     color:#6f6a63;
-
     font-size:8px;
-
-    line-height:1.6;
 }
 
 .payment-badge{
-
     margin-left:auto;
-
     color:var(--gold);
-
     font-family:var(--serif);
-
     font-size:20px;
-
-    white-space:nowrap;
 }
 
-
-/* ================= PAYMENT NOTICE ================= */
-
 .payment-notice{
-
-    display:none;
-
     margin-top:15px;
-
     padding:15px;
-
     border-left:2px solid var(--gold);
-
     background:rgba(200,164,93,.045);
-
     color:#817c75;
-
     font-size:8px;
-
     line-height:1.8;
 }
 
-.payment-notice.active{
-
-    display:block;
-}
-
-
-/* ================= ORDER SUMMARY ================= */
-
 .order-summary{
-
     align-self:start;
-
     position:sticky;
-
     top:120px;
-
-    border:1px solid rgba(200,164,93,.18);
-
-    background:
-
-    radial-gradient(
-        circle at 80% 10%,
-        rgba(200,164,93,.08),
-        transparent 45%
-    ),
-
-    rgba(255,255,255,.02);
-
-    padding:35px;
 }
 
 .summary-title{
-
     font-family:var(--serif);
-
     font-size:40px;
-
     font-weight:500;
-
     margin-bottom:28px;
 }
 
 .summary-items{
-
     display:flex;
-
     flex-direction:column;
-
     gap:12px;
-
     max-height:320px;
-
     overflow-y:auto;
 }
 
 .summary-item{
-
     display:flex;
-
     gap:13px;
-
     padding-bottom:13px;
-
     border-bottom:1px solid rgba(255,255,255,.06);
 }
 
 .summary-image{
-
     width:65px;
-
     height:70px;
-
     object-fit:contain;
-
-    background:rgba(255,255,255,.02);
 }
 
 .summary-info{
-
     flex:1;
 }
 
 .summary-name{
-
     font-family:var(--serif);
-
     font-size:21px;
-
-    line-height:1;
 }
 
 .summary-size{
-
     color:#6f6a63;
-
     font-size:7px;
-
-    letter-spacing:1px;
-
     margin-top:7px;
 }
 
 .summary-price{
-
     color:var(--gold);
-
     font-size:9px;
-
     margin-top:8px;
 }
 
 .summary-row{
-
     display:flex;
-
     justify-content:space-between;
-
     padding:15px 0;
-
     border-bottom:1px solid rgba(255,255,255,.06);
-
     color:#77726b;
-
     font-size:9px;
 }
 
 .summary-row.total{
-
     border-bottom:0;
-
-    color:var(--white);
-
+    color:white;
     font-size:14px;
-
-    padding-top:23px;
 }
 
 .place-order{
-
     width:100%;
-
     height:58px;
-
     border:1px solid var(--gold);
-
     background:var(--gold);
-
     color:#050505;
-
     margin-top:20px;
-
     font-size:8px;
-
     letter-spacing:3px;
-
     text-transform:uppercase;
-
     cursor:pointer;
-
-    transition:.35s;
-}
-
-.place-order:hover{
-
-    background:transparent;
-
-    color:var(--gold);
 }
 
 .place-order:disabled{
-
     opacity:.5;
-
     cursor:not-allowed;
 }
 
-.secure-note{
-
-    text-align:center;
-
-    color:#5f5b55;
-
-    font-size:7px;
-
-    letter-spacing:1px;
-
-    margin-top:18px;
-
-    line-height:1.8;
-}
-
-
-/* ================= EMPTY ================= */
-
 .empty-checkout{
-
     display:none;
-
     text-align:center;
-
     padding:100px 25px;
-
-    border:1px solid var(--border);
 }
-
-.empty-checkout h2{
-
-    font-family:var(--serif);
-
-    font-size:55px;
-
-    font-weight:500;
-
-    margin-bottom:15px;
-}
-
-.empty-checkout p{
-
-    color:#77726b;
-
-    font-size:9px;
-
-    margin-bottom:30px;
-}
-
-.back-shop{
-
-    display:inline-flex;
-
-    padding:15px 30px;
-
-    border:1px solid var(--gold);
-
-    color:var(--gold);
-
-    font-size:8px;
-
-    letter-spacing:2px;
-
-    text-transform:uppercase;
-}
-
-
-/* ================= FOOTER ================= */
 
 footer{
-
     border-top:1px solid var(--border);
-
     padding:50px 6% 30px;
-
     text-align:center;
 }
 
 footer .tagline{
-
     color:var(--gold);
-
     font-family:var(--serif);
-
     font-style:italic;
-
     font-size:17px;
-
     margin-bottom:15px;
 }
 
 .footer-links{
-
     display:flex;
-
     justify-content:center;
-
     flex-wrap:wrap;
-
     gap:25px;
-
     margin:25px 0;
 }
 
 .footer-links a{
-
     color:#625e58;
-
     font-size:7px;
-
     letter-spacing:2px;
-
     text-transform:uppercase;
 }
 
 footer p{
-
     color:#504c47;
-
     font-size:8px;
-
-    letter-spacing:1px;
 }
-
-
-/* ================= MOBILE ================= */
 
 @media(max-width:900px){
 
     .checkout-layout{
-
         grid-template-columns:1fr;
     }
 
     .order-summary{
-
         position:static;
     }
 }
 
-
 @media(max-width:750px){
 
     header{
-
         padding:17px 5%;
     }
 
     .nav-links{
-
         position:fixed;
-
         top:0;
-
         right:-100%;
-
         width:82%;
-
         height:100vh;
-
         padding:110px 35px;
-
         flex-direction:column;
-
-        align-items:flex-start;
-
-        gap:27px;
-
-        background:rgba(5,5,5,.98);
-
-        backdrop-filter:blur(25px);
-
-        border-left:1px solid rgba(200,164,93,.15);
-
+        background:#050505;
         transition:.4s;
     }
 
     .nav-links.active{
-
         right:0;
     }
 
     .menu-button{
-
         display:block;
-
         position:relative;
-
         z-index:1001;
     }
 
     .checkout-page{
-
         padding:135px 5% 80px;
     }
 
-    .checkout-hero h1{
-
-        font-size:65px;
-    }
-
-    .checkout-layout{
-
-        margin-top:45px;
-    }
-
-    .checkout-card{
-
+    .checkout-card,
+    .order-summary{
         padding:25px 20px;
     }
 
     .form-grid{
-
         grid-template-columns:1fr;
     }
 
     .form-group.full{
-
         grid-column:auto;
-    }
-
-    .payment-label{
-
-        padding:17px;
-    }
-
-    .payment-badge{
-
-        font-size:16px;
-    }
-
-    .order-summary{
-
-        padding:25px 20px;
-    }
-}
-
-
-@media(max-width:480px){
-
-    .logo-mark{
-
-        width:36px;
-        height:36px;
-    }
-
-    .logo-name strong{
-
-        font-size:20px;
-    }
-
-    .checkout-hero h1{
-
-        font-size:56px;
     }
 }
 
@@ -1028,11 +503,7 @@ footer p{
 
 </head>
 
-
 <body>
-
-
-<!-- ================= HEADER ================= -->
 
 <header>
 
@@ -1051,24 +522,12 @@ footer p{
 
 </a>
 
-
 <ul class="nav-links" id="navLinks">
 
-<li>
-<a href="index.html">Home</a>
-</li>
-
-<li>
-<a href="shop.html">Shop</a>
-</li>
-
-<li>
-<a href="about.html">Our Story</a>
-</li>
-
-<li>
-<a href="contact.html">Contact</a>
-</li>
+<li><a href="index.html">Home</a></li>
+<li><a href="shop.html">Shop</a></li>
+<li><a href="about.html">Our Story</a></li>
+<li><a href="contact.html">Contact</a></li>
 
 <li>
 <a href="cart.html" class="cart-link">
@@ -1078,25 +537,14 @@ Cart <span id="cartCount">(0)</span>
 
 </ul>
 
-
-<button
-class="menu-button"
-id="menuButton">
-
-☰
-
-</button>
+<button class="menu-button" id="menuButton">☰</button>
 
 </nav>
 
 </header>
 
 
-
-<!-- ================= MAIN ================= -->
-
 <main class="checkout-page">
-
 
 <section class="checkout-hero">
 
@@ -1104,129 +552,83 @@ id="menuButton">
 SECURE CHECKOUT
 </div>
 
-<h1>
-Complete Your Order
-</h1>
+<h1>Complete Your Order</h1>
 
-<p>
-Your NOIR selection is almost yours.
-</p>
+<p>Your NOIR selection is almost yours.</p>
 
 </section>
 
 
+<section class="empty-checkout" id="emptyCheckout">
 
-<!-- EMPTY CART -->
+<h2>Your cart is empty.</h2>
 
-<section
-class="empty-checkout"
-id="emptyCheckout">
+<p>Please select a fragrance before continuing.</p>
 
-<h2>
-Your cart is empty.
-</h2>
-
-<p>
-Please select a fragrance before continuing.
-</p>
-
-<a
-href="shop.html"
-class="back-shop">
-
-Explore Collection
-
-</a>
+<a href="shop.html">Explore Collection</a>
 
 </section>
 
 
-
-<!-- CHECKOUT -->
-
-<section
-class="checkout-layout"
-id="checkoutLayout">
+<section class="checkout-layout" id="checkoutLayout">
 
 
 <div>
 
-
-<!-- CUSTOMER INFORMATION -->
-
 <section class="checkout-card">
 
 <div class="card-eyebrow">
-01 · Delivery
+01 · DELIVERY
 </div>
 
 <h2 class="card-title">
 Your Details
 </h2>
 
-
 <div class="form-grid">
-
 
 <div class="form-group">
 
-<label for="fullName">
-Full Name
-</label>
+<label>Full Name</label>
 
 <input
 type="text"
 id="fullName"
 placeholder="Your full name"
-autocomplete="name"
 required>
 
 </div>
 
-
 <div class="form-group">
 
-<label for="phone">
-Phone Number
-</label>
+<label>Phone Number</label>
 
 <input
 type="tel"
 id="phone"
 placeholder="03XX XXXXXXX"
-autocomplete="tel"
 required>
 
 </div>
 
-
 <div class="form-group">
 
-<label for="email">
-Email Address
-</label>
+<label>Email Address</label>
 
 <input
 type="email"
 id="email"
-placeholder="you@example.com"
-autocomplete="email">
+placeholder="you@example.com">
 
 </div>
 
-
 <div class="form-group">
 
-<label for="city">
-City
-</label>
+<label>City</label>
 
 <select id="city" required>
 
-<option value="">
-Select city
-</option>
-
+<option value="">Select city</option>
 <option>Lahore</option>
 <option>Karachi</option>
 <option>Islamabad</option>
@@ -1238,18 +640,16 @@ Select city
 <option>Quetta</option>
 <option>Sialkot</option>
 <option>Bahawalpur</option>
+<option>Burewala</option>
 <option>Other</option>
 
 </select>
 
 </div>
 
-
 <div class="form-group full">
 
-<label for="address">
-Complete Delivery Address
-</label>
+<label>Complete Delivery Address</label>
 
 <textarea
 id="address"
@@ -1258,30 +658,22 @@ required></textarea>
 
 </div>
 
-
 </div>
 
 </section>
 
 
-
-<!-- PAYMENT -->
-
 <section class="checkout-card">
 
 <div class="card-eyebrow">
-02 · Payment
+02 · PAYMENT
 </div>
 
 <h2 class="card-title">
 Payment Method
 </h2>
 
-
 <div class="payment-options">
-
-
-<!-- COD -->
 
 <div class="payment-option">
 
@@ -1292,9 +684,7 @@ id="cod"
 value="COD"
 checked>
 
-<label
-for="cod"
-class="payment-label">
+<label for="cod" class="payment-label">
 
 <span class="payment-radio"></span>
 
@@ -1305,7 +695,7 @@ Cash on Delivery
 </span>
 
 <span class="payment-description">
-Pay when your NOIR fragrance arrives.
+Pay when your fragrance arrives.
 </span>
 
 </span>
@@ -1319,9 +709,6 @@ COD
 </div>
 
 
-
-<!-- JAZZCASH -->
-
 <div class="payment-option">
 
 <input
@@ -1330,9 +717,7 @@ name="payment"
 id="jazzcash"
 value="JazzCash">
 
-<label
-for="jazzcash"
-class="payment-label">
+<label for="jazzcash" class="payment-label">
 
 <span class="payment-radio"></span>
 
@@ -1343,22 +728,17 @@ JazzCash
 </span>
 
 <span class="payment-description">
-Pay securely through JazzCash.
+Online payment gateway.
 </span>
 
 </span>
 
-<span class="payment-badge">
-JC
-</span>
+<span class="payment-badge">JC</span>
 
 </label>
 
 </div>
 
-
-
-<!-- EASYPAISA -->
 
 <div class="payment-option">
 
@@ -1368,9 +748,7 @@ name="payment"
 id="easypaisa"
 value="Easypaisa">
 
-<label
-for="easypaisa"
-class="payment-label">
+<label for="easypaisa" class="payment-label">
 
 <span class="payment-radio"></span>
 
@@ -1381,22 +759,17 @@ Easypaisa
 </span>
 
 <span class="payment-description">
-Pay securely through Easypaisa.
+Online payment gateway.
 </span>
 
 </span>
 
-<span class="payment-badge">
-EP
-</span>
+<span class="payment-badge">EP</span>
 
 </label>
 
 </div>
 
-
-
-<!-- CARD -->
 
 <div class="payment-option">
 
@@ -1406,9 +779,7 @@ name="payment"
 id="card"
 value="Card">
 
-<label
-for="card"
-class="payment-label">
+<label for="card" class="payment-label">
 
 <span class="payment-radio"></span>
 
@@ -1424,21 +795,15 @@ Secure online card payment.
 
 </span>
 
-<span class="payment-badge">
-CARD
-</span>
+<span class="payment-badge">CARD</span>
 
 </label>
 
 </div>
 
-
 </div>
 
-
-<div
-class="payment-notice active"
-id="paymentNotice">
+<div class="payment-notice" id="paymentNotice">
 
 Cash on Delivery selected. You will pay the courier when your order arrives.
 
@@ -1449,78 +814,45 @@ Cash on Delivery selected. You will pay the courier when your order arrives.
 </div>
 
 
-
-<!-- ================= ORDER SUMMARY ================= -->
-
 <aside class="order-summary">
 
-
 <div class="card-eyebrow">
-03 · Your Order
+03 · YOUR ORDER
 </div>
 
 <h2 class="summary-title">
 Order Summary
 </h2>
 
-
-<div
-class="summary-items"
-id="summaryItems">
-</div>
-
+<div class="summary-items" id="summaryItems"></div>
 
 <div class="summary-row">
 
-<span>
-Items
-</span>
-
-<span id="itemCount">
-0
-</span>
+<span>Items</span>
+<span id="itemCount">0</span>
 
 </div>
-
 
 <div class="summary-row">
 
-<span>
-Subtotal
-</span>
-
-<span id="subtotal">
-Rs. 0
-</span>
+<span>Subtotal</span>
+<span id="subtotal">Rs. 0</span>
 
 </div>
-
 
 <div class="summary-row">
 
-<span>
-Delivery
-</span>
-
-<span id="delivery">
-Rs. 0
-</span>
+<span>Delivery</span>
+<span id="delivery">Rs. 250</span>
 
 </div>
-
 
 <div class="summary-row total">
 
-<span>
-Total
-</span>
-
-<span id="total">
-Rs. 0
-</span>
+<span>Total</span>
+<span id="total">Rs. 250</span>
 
 </div>
-
 
 <button
 class="place-order"
@@ -1530,26 +862,12 @@ Place Order
 
 </button>
 
-
-<div class="secure-note">
-
-🔒 Your information is handled securely.<br>
-
-NOIR FRAGRANCE · THE ART OF PRESENCE.
-
-</div>
-
-
 </aside>
-
 
 </section>
 
 </main>
 
-
-
-<!-- ================= FOOTER ================= -->
 
 <footer>
 
@@ -1557,23 +875,16 @@ NOIR FRAGRANCE · THE ART OF PRESENCE.
 The Art of Presence.
 </div>
 
-
 <div class="footer-links">
 
 <a href="index.html">Home</a>
-
 <a href="shop.html">Shop</a>
-
 <a href="about.html">Our Story</a>
-
 <a href="contact.html">Contact</a>
-
 <a href="privacy.html">Privacy Policy</a>
-
 <a href="terms.html">Terms & Conditions</a>
 
 </div>
-
 
 <p>
 © 2026 NOIR FRAGRANCE. ALL RIGHTS RESERVED.
@@ -1582,30 +893,100 @@ The Art of Presence.
 </footer>
 
 
+<script type="module">
 
-<script>
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 
-/* =========================================================
-NOIR CHECKOUT
-========================================================= */
+import {
+    getAuth,
+    signInAnonymously
+}
+from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+
+import {
+    getDatabase,
+    ref,
+    push
+}
+from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
+
+
+/* ================= FIREBASE ================= */
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyCCxNTzbQmMIHhi0BO0LpGbWcR4IWW7yQg",
+
+    authDomain:
+    "noirfragrance-7c5e5.firebaseapp.com",
+
+    databaseURL:
+    "https://noirfragrance-7c5e5-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+    projectId:
+    "noirfragrance-7c5e5",
+
+    storageBucket:
+    "noirfragrance-7c5e5.firebasestorage.app",
+
+    messagingSenderId:
+    "162914791523",
+
+    appId:
+    "1:162914791523:web:ef39fe95d1f7312a71c856"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getDatabase(app);
+
+
+/* ================= ANONYMOUS LOGIN ================= */
+
+let firebaseUser = null;
+
+try {
+
+    const result =
+    await signInAnonymously(auth);
+
+    firebaseUser =
+    result.user;
+
+    console.log(
+        "Firebase checkout authenticated."
+    );
+
+}
+catch(error){
+
+    console.error(
+        "Firebase authentication failed:",
+        error
+    );
+
+    alert(
+        "Unable to connect to the order system. Please try again."
+    );
+
+}
 
 
 /* ================= CART ================= */
 
 let cart =
 JSON.parse(
-    localStorage.getItem("noirCart")
-    || "[]"
+    localStorage.getItem("noirCart") || "[]"
 );
 
 
 /* ================= ELEMENTS ================= */
-
-const checkoutLayout =
-document.getElementById("checkoutLayout");
-
-const emptyCheckout =
-document.getElementById("emptyCheckout");
 
 const summaryItems =
 document.getElementById("summaryItems");
@@ -1625,8 +1006,16 @@ document.getElementById("total");
 const cartCount =
 document.getElementById("cartCount");
 
+const checkoutLayout =
+document.getElementById("checkoutLayout");
+
+const emptyCheckout =
+document.getElementById("emptyCheckout");
+
 const paymentNotice =
 document.getElementById("paymentNotice");
+
+const DELIVERY_CHARGE = 250;
 
 
 /* ================= PRICE ================= */
@@ -1639,48 +1028,29 @@ function formatPrice(price){
 }
 
 
-/* ================= DELIVERY ================= */
-
-/*
-    Temporary delivery charge.
-
-    We can later connect this to
-    your actual courier rates.
-*/
-
-const DELIVERY_CHARGE = 250;
-
-
-/* ================= RENDER ORDER ================= */
+/* ================= RENDER CART ================= */
 
 function renderOrder(){
 
     if(cart.length === 0){
 
-        checkoutLayout.style.display = "none";
+        checkoutLayout.style.display =
+        "none";
 
-        emptyCheckout.style.display = "block";
-
-        cartCount.textContent = "(0)";
+        emptyCheckout.style.display =
+        "block";
 
         return;
+
     }
-
-
-    checkoutLayout.style.display = "grid";
-
-    emptyCheckout.style.display = "none";
-
 
     summaryItems.innerHTML = "";
 
-
-    let productsCount = 0;
-
+    let count = 0;
     let subtotalAmount = 0;
 
 
-    cart.forEach(item=>{
+    cart.forEach(item => {
 
         const quantity =
         Number(item.quantity) || 1;
@@ -1688,8 +1058,7 @@ function renderOrder(){
         const price =
         Number(item.price) || 0;
 
-
-        productsCount += quantity;
+        count += quantity;
 
         subtotalAmount +=
         price * quantity;
@@ -1697,348 +1066,3 @@ function renderOrder(){
 
         const element =
         document.createElement("div");
-
-
-        element.className =
-        "summary-item";
-
-
-        element.innerHTML = `
-
-            <img
-                class="summary-image"
-                src="${item.image || "noir.png"}"
-                alt="${item.name || "NOIR Fragrance"}"
-            >
-
-            <div class="summary-info">
-
-                <div class="summary-name">
-                    ${item.name || "NOIR FRAGRANCE"}
-                </div>
-
-                <div class="summary-size">
-                    ${item.size || "50 ML"} × ${quantity}
-                </div>
-
-                <div class="summary-price">
-                    ${formatPrice(price * quantity)}
-                </div>
-
-            </div>
-
-        `;
-
-
-        summaryItems.appendChild(element);
-
-    });
-
-
-    const totalAmount =
-    subtotalAmount + DELIVERY_CHARGE;
-
-
-    itemCount.textContent =
-    productsCount;
-
-
-    subtotal.textContent =
-    formatPrice(subtotalAmount);
-
-
-    delivery.textContent =
-    formatPrice(DELIVERY_CHARGE);
-
-
-    total.textContent =
-    formatPrice(totalAmount);
-
-
-    cartCount.textContent =
-    `(${productsCount})`;
-
-}
-
-
-renderOrder();
-
-
-/* =========================================================
-PAYMENT METHOD
-========================================================= */
-
-document
-.querySelectorAll('input[name="payment"]')
-.forEach(radio=>{
-
-    radio.addEventListener("change",()=>{
-
-        if(radio.value === "COD"){
-
-            paymentNotice.textContent =
-            "Cash on Delivery selected. You will pay the courier when your order arrives.";
-
-            paymentNotice.classList.add("active");
-
-        }
-
-
-        else if(radio.value === "JazzCash"){
-
-            paymentNotice.textContent =
-            "JazzCash selected. The secure JazzCash payment gateway will be connected here once your merchant account is activated.";
-
-            paymentNotice.classList.add("active");
-
-        }
-
-
-        else if(radio.value === "Easypaisa"){
-
-            paymentNotice.textContent =
-            "Easypaisa selected. The secure Easypaisa payment gateway will be connected here once your merchant account is activated.";
-
-            paymentNotice.classList.add("active");
-
-        }
-
-
-        else if(radio.value === "Card"){
-
-            paymentNotice.textContent =
-            "Card payment selected. You will be redirected to a secure payment gateway once NOIR's card payment integration is activated.";
-
-            paymentNotice.classList.add("active");
-
-        }
-
-    });
-
-});
-
-
-/* =========================================================
-PLACE ORDER
-========================================================= */
-
-document
-.getElementById("placeOrder")
-.addEventListener("click",()=>{
-
-
-    if(cart.length === 0){
-
-        alert(
-            "Your cart is empty."
-        );
-
-        return;
-
-    }
-
-
-    const name =
-    document
-    .getElementById("fullName")
-    .value
-    .trim();
-
-
-    const phone =
-    document
-    .getElementById("phone")
-    .value
-    .trim();
-
-
-    const city =
-    document
-    .getElementById("city")
-    .value;
-
-
-    const address =
-    document
-    .getElementById("address")
-    .value
-    .trim();
-
-
-    if(!name || !phone || !city || !address){
-
-        alert(
-            "Please complete your name, phone number, city and delivery address."
-        );
-
-        return;
-
-    }
-
-
-    const payment =
-    document
-    .querySelector(
-        'input[name="payment"]:checked'
-    )
-    .value;
-
-
-    /*
-       IMPORTANT:
-
-       At this stage we DO NOT pretend
-       online payments are live.
-
-       COD can be processed as an order.
-
-       JazzCash/Easypaisa/Card will later
-       connect to their real merchant APIs.
-    */
-
-
-    if(payment !== "COD"){
-
-        alert(
-
-            payment +
-            " payment is selected, but the real payment gateway has not been connected yet. We will connect the official merchant gateway next."
-
-        );
-
-        return;
-
-    }
-
-
-    /* ================= COD ORDER ================= */
-
-    const order = {
-
-        orderId:
-        "NOIR-" +
-        Date.now(),
-
-        customer:{
-
-            name:name,
-
-            phone:phone,
-
-            email:
-            document
-            .getElementById("email")
-            .value
-            .trim(),
-
-            city:city,
-
-            address:address
-
-        },
-
-        paymentMethod:payment,
-
-        items:cart,
-
-        subtotal:
-        cart.reduce(
-            (sum,item)=>
-            sum +
-            (
-                Number(item.price) *
-                (Number(item.quantity)||1)
-            ),
-            0
-        ),
-
-        delivery:
-        DELIVERY_CHARGE,
-
-        status:
-        "Pending",
-
-        createdAt:
-        new Date().toISOString()
-
-    };
-
-
-    /*
-        TEMPORARY:
-
-        Save the order locally.
-
-        Later this will be replaced with
-        a real secure backend/database.
-    */
-
-    localStorage.setItem(
-        "noirLastOrder",
-        JSON.stringify(order)
-    );
-
-
-    /*
-        Clear cart after order.
-    */
-
-    localStorage.removeItem(
-        "noirCart"
-    );
-
-
-    /*
-        Move to order confirmation.
-    */
-
-    window.location.href =
-    "order-success.html";
-
-});
-
-
-/* =========================================================
-MOBILE MENU
-========================================================= */
-
-const menuButton =
-document.getElementById("menuButton");
-
-const navLinks =
-document.getElementById("navLinks");
-
-
-menuButton.addEventListener("click",()=>{
-
-    navLinks.classList.toggle("active");
-
-    menuButton.textContent =
-    navLinks.classList.contains("active")
-    ? "✕"
-    : "☰";
-
-});
-
-
-document
-.querySelectorAll(".nav-links a")
-.forEach(link=>{
-
-    link.addEventListener("click",()=>{
-
-        navLinks.classList.remove("active");
-
-        menuButton.textContent =
-        "☰";
-
-    });
-
-});
-
-</script>
-
-
-</body>
-
-</html>
