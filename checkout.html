@@ -1,966 +1,1460 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Checkout — NOIR FRAGRANCE</title>
-<link rel="icon" href="noir.png">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-<style>
-:root{
-    --black:#050505;
-    --gold:#c8a45d;
-    --white:#f4f0e8;
-    --border:rgba(255,255,255,.09);
-    --serif:"Cormorant Garamond",serif;
-    --sans:"Montserrat",sans-serif;
-}
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    background:
-    radial-gradient(circle at 80% 10%,rgba(200,164,93,.08),transparent 30%),
-    var(--black);
-    color:var(--white);
-    font-family:var(--sans);
-    overflow-x:hidden;
-}
-
-a{
-    text-decoration:none;
-    color:inherit;
-}
-
-button,input,textarea,select{
-    font-family:inherit;
-}
-
-header{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    z-index:1000;
-    padding:21px 6%;
-    background:rgba(5,5,5,.82);
-    backdrop-filter:blur(22px);
-    -webkit-backdrop-filter:blur(22px);
-    border-bottom:1px solid rgba(255,255,255,.06);
-}
-
-nav{
-    max-width:1450px;
-    margin:auto;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.logo{
-    display:flex;
-    align-items:center;
-    gap:13px;
-}
-
-.logo-mark{
-    width:42px;
-    height:42px;
-    border:1px solid var(--gold);
-    display:grid;
-    place-items:center;
-    transform:rotate(45deg);
-}
-
-.logo-mark span{
-    transform:rotate(-45deg);
-    font-family:var(--serif);
-    color:var(--gold);
-    font-size:25px;
-}
-
-.logo-name{
-    display:flex;
-    flex-direction:column;
-    line-height:1;
-}
-
-.logo-name strong{
-    font-family:var(--serif);
-    font-size:24px;
-    letter-spacing:5px;
-}
-
-.logo-name small{
-    color:var(--gold);
-    font-size:7px;
-    letter-spacing:4px;
-    margin-top:5px;
-}
-
-.nav-links{
-    display:flex;
-    align-items:center;
-    gap:34px;
-    list-style:none;
-}
-
-.nav-links a{
-    color:#aaa59e;
-    font-size:9px;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    transition:.3s;
-}
-
-.nav-links a:hover{
-    color:var(--gold);
-}
-
-.cart-link{
-    border:1px solid rgba(200,164,93,.4);
-    padding:11px 17px;
-    color:var(--gold)!important;
-}
-
-.menu-button{
-    display:none;
-    background:transparent;
-    border:0;
-    color:white;
-    font-size:25px;
-    cursor:pointer;
-}
-
-.checkout-page{
-    max-width:1250px;
-    margin:auto;
-    padding:165px 6% 100px;
-}
-
-.checkout-hero{
-    text-align:center;
-    padding-bottom:55px;
-    border-bottom:1px solid var(--border);
-}
-
-.eyebrow{
-    color:var(--gold);
-    font-size:9px;
-    letter-spacing:5px;
-    text-transform:uppercase;
-    margin-bottom:18px;
-}
-
-.checkout-hero h1{
-    font-family:var(--serif);
-    font-size:clamp(60px,8vw,100px);
-    font-weight:500;
-    line-height:.8;
-    margin-bottom:22px;
-}
-
-.checkout-hero p{
-    color:#77726b;
-    font-size:10px;
-}
-
-.checkout-layout{
-    display:grid;
-    grid-template-columns:1fr 390px;
-    gap:35px;
-    margin-top:60px;
-}
-
-.checkout-card,
-.order-summary{
-    border:1px solid var(--border);
-    background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.01));
-    padding:35px;
-    margin-bottom:18px;
-}
-
-.card-eyebrow{
-    color:var(--gold);
-    font-size:8px;
-    letter-spacing:4px;
-    text-transform:uppercase;
-    margin-bottom:10px;
-}
-
-.card-title{
-    font-family:var(--serif);
-    font-size:36px;
-    font-weight:500;
-    margin-bottom:30px;
-}
-
-.form-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:16px;
-}
-
-.form-group{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-}
-
-.form-group.full{
-    grid-column:1/-1;
-}
-
-.form-group label{
-    color:#77726b;
-    font-size:8px;
-    letter-spacing:2px;
-    text-transform:uppercase;
-}
-
-.form-group input,
-.form-group textarea,
-.form-group select{
-    width:100%;
-    border:1px solid rgba(255,255,255,.1);
-    outline:none;
-    background:rgba(255,255,255,.025);
-    color:white;
-    padding:15px;
-    font-size:10px;
-    transition:.3s;
-}
-
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus{
-    border-color:rgba(200,164,93,.7);
-}
-
-.form-group textarea{
-    min-height:105px;
-    resize:vertical;
-}
-
-.form-group select option{
-    background:#0b0b0b;
-    color:white;
-}
-
-.payment-options{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-}
-
-.payment-option{
-    position:relative;
-}
-
-.payment-option input{
-    position:absolute;
-    opacity:0;
-}
-
-.payment-label{
-    display:flex;
-    align-items:center;
-    gap:16px;
-    padding:20px;
-    border:1px solid rgba(255,255,255,.09);
-    background:rgba(255,255,255,.02);
-    cursor:pointer;
-    transition:.3s;
-}
-
-.payment-label:hover{
-    border-color:rgba(200,164,93,.45);
-}
-
-.payment-option input:checked + .payment-label{
-    border-color:var(--gold);
-    background:rgba(200,164,93,.055);
-}
-
-.payment-radio{
-    width:18px;
-    height:18px;
-    border:1px solid #777;
-    border-radius:50%;
-    flex-shrink:0;
-}
-
-.payment-option input:checked + .payment-label .payment-radio{
-    border-color:var(--gold);
-    box-shadow:inset 0 0 0 5px #050505;
-    background:var(--gold);
-}
-
-.payment-info{
-    display:flex;
-    flex-direction:column;
-    gap:5px;
-}
-
-.payment-name{
-    font-size:10px;
-    letter-spacing:1px;
-    text-transform:uppercase;
-}
-
-.payment-description{
-    color:#6f6a63;
-    font-size:8px;
-    line-height:1.6;
-}
-
-.payment-badge{
-    margin-left:auto;
-    color:var(--gold);
-    font-family:var(--serif);
-    font-size:20px;
-}
-
-.payment-notice{
-    margin-top:15px;
-    padding:15px;
-    border-left:2px solid var(--gold);
-    background:rgba(200,164,93,.045);
-    color:#817c75;
-    font-size:8px;
-    line-height:1.8;
-}
-
-.order-summary{
-    align-self:start;
-    position:sticky;
-    top:120px;
-}
-
-.summary-title{
-    font-family:var(--serif);
-    font-size:40px;
-    font-weight:500;
-    margin-bottom:28px;
-}
-
-.summary-items{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-    max-height:320px;
-    overflow-y:auto;
-}
-
-.summary-item{
-    display:flex;
-    gap:13px;
-    padding-bottom:13px;
-    border-bottom:1px solid rgba(255,255,255,.06);
-}
-
-.summary-image{
-    width:65px;
-    height:70px;
-    object-fit:contain;
-    background:rgba(255,255,255,.02);
-}
-
-.summary-info{
-    flex:1;
-}
-
-.summary-name{
-    font-family:var(--serif);
-    font-size:21px;
-    line-height:1;
-}
-
-.summary-size{
-    color:#6f6a63;
-    font-size:7px;
-    margin-top:7px;
-}
-
-.summary-price{
-    color:var(--gold);
-    font-size:9px;
-    margin-top:8px;
-}
-
-.summary-row{
-    display:flex;
-    justify-content:space-between;
-    padding:15px 0;
-    border-bottom:1px solid rgba(255,255,255,.06);
-    color:#77726b;
-    font-size:9px;
-}
-
-.summary-row.total{
-    border-bottom:0;
-    color:white;
-    font-size:14px;
-    padding-top:22px;
-}
-
-.place-order{
-    width:100%;
-    height:58px;
-    border:1px solid var(--gold);
-    background:var(--gold);
-    color:#050505;
-    margin-top:20px;
-    font-size:8px;
-    font-weight:600;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    cursor:pointer;
-    transition:.35s;
-}
-
-.place-order:hover{
-    background:transparent;
-    color:var(--gold);
-}
-
-.place-order:disabled{
-    opacity:.5;
-    cursor:not-allowed;
-}
-
-.empty-checkout{
-    display:none;
-    text-align:center;
-    padding:100px 25px;
-    border:1px solid var(--border);
-}
-
-.empty-checkout h2{
-    font-family:var(--serif);
-    font-size:55px;
-    font-weight:500;
-    margin-bottom:15px;
-}
-
-.empty-checkout p{
-    color:#77726b;
-    font-size:9px;
-    margin-bottom:30px;
-}
-
-.empty-checkout a{
-    display:inline-block;
-    padding:15px 30px;
-    border:1px solid var(--gold);
-    color:var(--gold);
-    font-size:8px;
-    letter-spacing:2px;
-    text-transform:uppercase;
-}
-
-footer{
-    border-top:1px solid var(--border);
-    padding:50px 6% 30px;
-    text-align:center;
-}
-
-footer .tagline{
-    color:var(--gold);
-    font-family:var(--serif);
-    font-style:italic;
-    font-size:17px;
-    margin-bottom:15px;
-}
-
-.footer-links{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:25px;
-    margin:25px 0;
-}
-
-.footer-links a{
-    color:#625e58;
-    font-size:7px;
-    letter-spacing:2px;
-    text-transform:uppercase;
-}
-
-footer p{
-    color:#504c47;
-    font-size:8px;
-}
-
-@media(max-width:900px){
-
-    .checkout-layout{
-        grid-template-columns:1fr;
-    }
-
-    .order-summary{
-        position:static;
-    }
-}
-
-@media(max-width:750px){
-
-    header{
-        padding:17px 5%;
-    }
-
-    .nav-links{
-        position:fixed;
-        top:0;
-        right:-100%;
-        width:82%;
-        height:100vh;
-        padding:110px 35px;
-        flex-direction:column;
-        align-items:flex-start;
-        gap:27px;
-        background:rgba(5,5,5,.98);
-        transition:.4s;
-        border-left:1px solid rgba(200,164,93,.15);
-    }
-
-    .nav-links.active{
-        right:0;
-    }
-
-    .menu-button{
-        display:block;
-        position:relative;
-        z-index:1001;
-    }
-
-    .checkout-page{
-        padding:135px 5% 80px;
-    }
-
-    .checkout-hero h1{
-        font-size:60px;
-    }
-
-    .checkout-card,
-    .order-summary{
-        padding:25px 20px;
-    }
-
-    .form-grid{
-        grid-template-columns:1fr;
-    }
-
-    .form-group.full{
-        grid-column:auto;
-    }
-}
-
-@media(max-width:480px){
-
-    .logo-mark{
-        width:36px;
-        height:36px;
-    }
-
-    .logo-name strong{
-        font-size:20px;
-    }
-
-    .checkout-hero h1{
-        font-size:52px;
-    }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Checkout — NOIR FRAGRANCE</title>
+    <link rel="icon" href="noir.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+
+        :root {
+            --black: #050505;
+            --gold: #c8a45d;
+            --white: #f4f0e8;
+            --border: rgba(255,255,255,.09);
+            --serif: "Cormorant Garamond", serif;
+            --sans: "Montserrat", sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background:
+                radial-gradient(
+                    circle at 80% 10%,
+                    rgba(200,164,93,.08),
+                    transparent 30%
+                ),
+                var(--black);
+
+            color: var(--white);
+            font-family: var(--sans);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font-family: inherit;
+        }
+
+
+        /* ================= HEADER ================= */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+
+            padding: 21px 6%;
+
+            background: rgba(5,5,5,.82);
+
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+
+            border-bottom: 1px solid rgba(255,255,255,.06);
+        }
+
+        nav {
+            max-width: 1450px;
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+
+        /* ================= LOGO ================= */
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .logo-mark {
+            width: 42px;
+            height: 42px;
+
+            border: 1px solid var(--gold);
+
+            display: grid;
+            place-items: center;
+
+            transform: rotate(45deg);
+        }
+
+        .logo-mark span {
+            transform: rotate(-45deg);
+
+            font-family: var(--serif);
+            color: var(--gold);
+
+            font-size: 25px;
+        }
+
+        .logo-name {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .logo-name strong {
+            font-family: var(--serif);
+            font-size: 24px;
+            letter-spacing: 5px;
+        }
+
+        .logo-name small {
+            color: var(--gold);
+            font-size: 7px;
+            letter-spacing: 4px;
+            margin-top: 5px;
+        }
+
+
+        /* ================= NAVIGATION ================= */
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 34px;
+
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #aaa59e;
+
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+
+            transition: .3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .cart-link {
+            border: 1px solid rgba(200,164,93,.4);
+
+            padding: 11px 17px;
+
+            color: var(--gold) !important;
+        }
+
+        .menu-button {
+            display: none;
+
+            background: transparent;
+            border: 0;
+
+            color: white;
+
+            font-size: 25px;
+
+            cursor: pointer;
+        }
+
+
+        /* ================= CHECKOUT ================= */
+
+        .checkout-page {
+            max-width: 1250px;
+
+            margin: auto;
+
+            padding: 165px 6% 100px;
+        }
+
+        .checkout-hero {
+            text-align: center;
+
+            padding-bottom: 55px;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .eyebrow {
+            color: var(--gold);
+
+            font-size: 9px;
+
+            letter-spacing: 5px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 18px;
+        }
+
+        .checkout-hero h1 {
+            font-family: var(--serif);
+
+            font-size: clamp(60px,8vw,100px);
+
+            font-weight: 500;
+
+            line-height: .8;
+
+            margin-bottom: 22px;
+        }
+
+        .checkout-hero p {
+            color: #77726b;
+
+            font-size: 10px;
+        }
+
+
+        /* ================= LAYOUT ================= */
+
+        .checkout-layout {
+            display: grid;
+
+            grid-template-columns: 1fr 390px;
+
+            gap: 35px;
+
+            margin-top: 60px;
+        }
+
+
+        .checkout-card,
+        .order-summary {
+
+            border: 1px solid var(--border);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.045),
+                    rgba(255,255,255,.01)
+                );
+
+            padding: 35px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .card-eyebrow {
+            color: var(--gold);
+
+            font-size: 8px;
+
+            letter-spacing: 4px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 10px;
+        }
+
+        .card-title {
+            font-family: var(--serif);
+
+            font-size: 36px;
+
+            font-weight: 500;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* ================= FORM ================= */
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            color: #77726b;
+
+            font-size: 8px;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+
+            width: 100%;
+
+            border: 1px solid rgba(255,255,255,.1);
+
+            outline: none;
+
+            background: rgba(255,255,255,.025);
+
+            color: white;
+
+            padding: 15px;
+
+            font-size: 10px;
+
+            transition: .3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+
+            border-color: rgba(200,164,93,.7);
+        }
+
+        .form-group textarea {
+            min-height: 105px;
+
+            resize: vertical;
+        }
+
+        .form-group select option {
+            background: #0b0b0b;
+            color: white;
+        }
+
+
+        /* ================= PAYMENT ================= */
+
+        .payment-options {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+        }
+
+        .payment-option {
+            position: relative;
+        }
+
+        .payment-option input {
+            position: absolute;
+
+            opacity: 0;
+        }
+
+        .payment-label {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 16px;
+
+            padding: 20px;
+
+            border: 1px solid rgba(255,255,255,.09);
+
+            background: rgba(255,255,255,.02);
+
+            cursor: pointer;
+
+            transition: .3s;
+        }
+
+        .payment-label:hover {
+            border-color: rgba(200,164,93,.45);
+        }
+
+        .payment-option input:checked + .payment-label {
+
+            border-color: var(--gold);
+
+            background: rgba(200,164,93,.055);
+        }
+
+        .payment-radio {
+
+            width: 18px;
+            height: 18px;
+
+            border: 1px solid #777;
+
+            border-radius: 50%;
+
+            flex-shrink: 0;
+        }
+
+        .payment-option input:checked
+        + .payment-label
+        .payment-radio {
+
+            border-color: var(--gold);
+
+            box-shadow:
+                inset 0 0 0 5px #050505;
+
+            background: var(--gold);
+        }
+
+        .payment-info {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 5px;
+        }
+
+        .payment-name {
+
+            font-size: 10px;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+        }
+
+        .payment-description {
+
+            color: #6f6a63;
+
+            font-size: 8px;
+
+            line-height: 1.6;
+        }
+
+        .payment-badge {
+
+            margin-left: auto;
+
+            color: var(--gold);
+
+            font-family: var(--serif);
+
+            font-size: 20px;
+        }
+
+        .payment-notice {
+
+            margin-top: 15px;
+
+            padding: 15px;
+
+            border-left: 2px solid var(--gold);
+
+            background: rgba(200,164,93,.045);
+
+            color: #817c75;
+
+            font-size: 8px;
+
+            line-height: 1.8;
+        }
+
+
+        /* ================= ORDER SUMMARY ================= */
+
+        .order-summary {
+
+            align-self: start;
+
+            position: sticky;
+
+            top: 120px;
+        }
+
+        .summary-title {
+
+            font-family: var(--serif);
+
+            font-size: 40px;
+
+            font-weight: 500;
+
+            margin-bottom: 28px;
+        }
+
+        .summary-items {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+
+            max-height: 320px;
+
+            overflow-y: auto;
+        }
+
+        .summary-item {
+
+            display: flex;
+
+            gap: 13px;
+
+            padding-bottom: 13px;
+
+            border-bottom:
+                1px solid rgba(255,255,255,.06);
+        }
+
+        .summary-image {
+
+            width: 65px;
+            height: 70px;
+
+            object-fit: contain;
+
+            background: rgba(255,255,255,.02);
+        }
+
+        .summary-info {
+            flex: 1;
+        }
+
+        .summary-name {
+
+            font-family: var(--serif);
+
+            font-size: 21px;
+
+            line-height: 1;
+        }
+
+        .summary-size {
+
+            color: #6f6a63;
+
+            font-size: 7px;
+
+            margin-top: 7px;
+        }
+
+        .summary-price {
+
+            color: var(--gold);
+
+            font-size: 9px;
+
+            margin-top: 8px;
+        }
+
+        .summary-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            padding: 15px 0;
+
+            border-bottom:
+                1px solid rgba(255,255,255,.06);
+
+            color: #77726b;
+
+            font-size: 9px;
+        }
+
+        .summary-row.total {
+
+            border-bottom: 0;
+
+            color: white;
+
+            font-size: 14px;
+
+            padding-top: 22px;
+        }
+
+
+        /* ================= PLACE ORDER ================= */
+
+        .place-order {
+
+            width: 100%;
+
+            height: 58px;
+
+            border: 1px solid var(--gold);
+
+            background: var(--gold);
+
+            color: #050505;
+
+            margin-top: 20px;
+
+            font-size: 8px;
+
+            font-weight: 600;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            cursor: pointer;
+
+            transition: .35s;
+        }
+
+        .place-order:hover {
+
+            background: transparent;
+
+            color: var(--gold);
+        }
+
+        .place-order:disabled {
+
+            opacity: .5;
+
+            cursor: not-allowed;
+        }
+
+
+        /* ================= EMPTY CART ================= */
+
+        .empty-checkout {
+
+            display: none;
+
+            text-align: center;
+
+            padding: 100px 25px;
+
+            border: 1px solid var(--border);
+        }
+
+        .empty-checkout h2 {
+
+            font-family: var(--serif);
+
+            font-size: 55px;
+
+            font-weight: 500;
+
+            margin-bottom: 15px;
+        }
+
+        .empty-checkout p {
+
+            color: #77726b;
+
+            font-size: 9px;
+
+            margin-bottom: 30px;
+        }
+
+        .empty-checkout a {
+
+            display: inline-block;
+
+            padding: 15px 30px;
+
+            border: 1px solid var(--gold);
+
+            color: var(--gold);
+
+            font-size: 8px;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+
+            border-top: 1px solid var(--border);
+
+            padding: 50px 6% 30px;
+
+            text-align: center;
+        }
+
+        footer .tagline {
+
+            color: var(--gold);
+
+            font-family: var(--serif);
+
+            font-style: italic;
+
+            font-size: 17px;
+
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+
+            display: flex;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 25px;
+
+            margin: 25px 0;
+        }
+
+        .footer-links a {
+
+            color: #625e58;
+
+            font-size: 7px;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+        }
+
+        footer p {
+
+            color: #504c47;
+
+            font-size: 8px;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width:900px) {
+
+            .checkout-layout {
+
+                grid-template-columns: 1fr;
+            }
+
+            .order-summary {
+
+                position: static;
+            }
+        }
+
+
+        @media(max-width:750px) {
+
+            header {
+                padding: 17px 5%;
+            }
+
+            .nav-links {
+
+                position: fixed;
+
+                top: 0;
+
+                right: -100%;
+
+                width: 82%;
+
+                height: 100vh;
+
+                padding: 110px 35px;
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 27px;
+
+                background: rgba(5,5,5,.98);
+
+                transition: .4s;
+
+                border-left:
+                    1px solid rgba(200,164,93,.15);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .menu-button {
+
+                display: block;
+
+                position: relative;
+
+                z-index: 1001;
+            }
+
+            .checkout-page {
+
+                padding: 135px 5% 80px;
+            }
+
+            .checkout-hero h1 {
+
+                font-size: 60px;
+            }
+
+            .checkout-card,
+            .order-summary {
+
+                padding: 25px 20px;
+            }
+
+            .form-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+
+                grid-column: auto;
+            }
+        }
+
+
+        @media(max-width:480px) {
+
+            .logo-mark {
+
+                width: 36px;
+                height: 36px;
+            }
+
+            .logo-name strong {
+
+                font-size: 20px;
+            }
+
+            .checkout-hero h1 {
+
+                font-size: 52px;
+            }
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
 <header>
-<nav>
 
-<a href="index.html" class="logo">
-    <div class="logo-mark">
-        <span>N</span>
-    </div>
+    <nav>
 
-    <div class="logo-name">
-        <strong>NOIR</strong>
-        <small>FRAGRANCE</small>
-    </div>
-</a>
+        <a href="index.html" class="logo">
 
-<ul class="nav-links" id="navLinks">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="shop.html">Shop</a></li>
-    <li><a href="about.html">Our Story</a></li>
-    <li><a href="contact.html">Contact</a></li>
+            <div class="logo-mark">
+                <span>N</span>
+            </div>
 
-    <li>
-        <a href="cart.html" class="cart-link">
-            Cart <span id="cartCount">(0)</span>
+            <div class="logo-name">
+
+                <strong>NOIR</strong>
+
+                <small>FRAGRANCE</small>
+
+            </div>
+
         </a>
-    </li>
-</ul>
 
-<button class="menu-button" id="menuButton">☰</button>
 
-</nav>
+        <ul class="nav-links" id="navLinks">
+
+            <li>
+                <a href="index.html">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="shop.html">
+                    Shop
+                </a>
+            </li>
+
+            <li>
+                <a href="about.html">
+                    Our Story
+                </a>
+            </li>
+
+            <li>
+                <a href="contact.html">
+                    Contact
+                </a>
+            </li>
+
+            <li>
+
+                <a href="cart.html" class="cart-link">
+
+                    Cart
+                    <span id="cartCount">(0)</span>
+
+                </a>
+
+            </li>
+
+        </ul>
+
+
+        <button
+            class="menu-button"
+            id="menuButton">
+
+            ☰
+
+        </button>
+
+    </nav>
+
 </header>
 
 
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
 <main class="checkout-page">
 
-<section class="checkout-hero">
 
-    <div class="eyebrow">
-        SECURE CHECKOUT
-    </div>
+    <section class="checkout-hero">
 
-    <h1>Complete Your Order</h1>
+        <div class="eyebrow">
+            SECURE CHECKOUT
+        </div>
 
-    <p>Your NOIR selection is almost yours.</p>
+        <h1>
+            Complete Your Order
+        </h1>
 
-</section>
+        <p>
+            Your NOIR selection is almost yours.
+        </p>
 
-
-<section class="empty-checkout" id="emptyCheckout">
-
-    <h2>Your cart is empty.</h2>
-
-    <p>Please select a fragrance before continuing.</p>
-
-    <a href="shop.html">Explore Collection</a>
-
-</section>
+    </section>
 
 
-<section class="checkout-layout" id="checkoutLayout">
 
-<div>
+    <!-- EMPTY CART -->
 
-<section class="checkout-card">
+    <section
+        class="empty-checkout"
+        id="emptyCheckout">
 
-    <div class="card-eyebrow">
-        01 · DELIVERY
-    </div>
+        <h2>
+            Your cart is empty.
+        </h2>
 
-    <h2 class="card-title">
-        Your Details
-    </h2>
+        <p>
+            Please select a fragrance before continuing.
+        </p>
 
-    <div class="form-grid">
+        <a href="shop.html">
+            Explore Collection
+        </a>
 
-        <div class="form-group">
-            <label for="fullName">Full Name</label>
+    </section>
 
-            <input
-                type="text"
-                id="fullName"
-                placeholder="Your full name"
-                autocomplete="name"
-                required>
+
+
+    <!-- CHECKOUT -->
+
+    <section
+        class="checkout-layout"
+        id="checkoutLayout">
+
+
+        <!-- LEFT -->
+
+        <div>
+
+
+            <!-- DELIVERY -->
+
+            <section class="checkout-card">
+
+                <div class="card-eyebrow">
+                    01 · DELIVERY
+                </div>
+
+                <h2 class="card-title">
+                    Your Details
+                </h2>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label for="fullName">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="fullName"
+                            placeholder="Your full name"
+                            autocomplete="name"
+                            required>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="phone">
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            placeholder="03XX XXXXXXX"
+                            autocomplete="tel"
+                            required>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="you@example.com"
+                            autocomplete="email">
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="city">
+                            City
+                        </label>
+
+                        <select
+                            id="city"
+                            required>
+
+                            <option value="">
+                                Select city
+                            </option>
+
+                            <option>
+                                Lahore
+                            </option>
+
+                            <option>
+                                Karachi
+                            </option>
+
+                            <option>
+                                Islamabad
+                            </option>
+
+                            <option>
+                                Rawalpindi
+                            </option>
+
+                            <option>
+                                Faisalabad
+                            </option>
+
+                            <option>
+                                Multan
+                            </option>
+
+                            <option>
+                                Gujranwala
+                            </option>
+
+                            <option>
+                                Peshawar
+                            </option>
+
+                            <option>
+                                Quetta
+                            </option>
+
+                            <option>
+                                Sialkot
+                            </option>
+
+                            <option>
+                                Bahawalpur
+                            </option>
+
+                            <option>
+                                Burewala
+                            </option>
+
+                            <option>
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <div class="form-group full">
+
+                        <label for="address">
+                            Complete Delivery Address
+                        </label>
+
+                        <textarea
+                            id="address"
+                            placeholder="House / Flat number, street, area..."
+                            required></textarea>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+
+            <!-- PAYMENT -->
+
+            <section class="checkout-card">
+
+                <div class="card-eyebrow">
+                    02 · PAYMENT
+                </div>
+
+                <h2 class="card-title">
+                    Payment Method
+                </h2>
+
+
+                <div class="payment-options">
+
+
+                    <!-- COD -->
+
+                    <div class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="payment"
+                            id="cod"
+                            value="COD"
+                            checked>
+
+                        <label
+                            for="cod"
+                            class="payment-label">
+
+                            <span class="payment-radio"></span>
+
+                            <span class="payment-info">
+
+                                <span class="payment-name">
+                                    Cash on Delivery
+                                </span>
+
+                                <span class="payment-description">
+                                    Pay when your fragrance arrives.
+                                </span>
+
+                            </span>
+
+                            <span class="payment-badge">
+                                COD
+                            </span>
+
+                        </label>
+
+                    </div>
+
+
+
+                    <!-- JAZZCASH -->
+
+                    <div class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="payment"
+                            id="jazzcash"
+                            value="JazzCash">
+
+                        <label
+                            for="jazzcash"
+                            class="payment-label">
+
+                            <span class="payment-radio"></span>
+
+                            <span class="payment-info">
+
+                                <span class="payment-name">
+                                    JazzCash
+                                </span>
+
+                                <span class="payment-description">
+                                    Online payment gateway.
+                                </span>
+
+                            </span>
+
+                            <span class="payment-badge">
+                                JC
+                            </span>
+
+                        </label>
+
+                    </div>
+
+
+
+                    <!-- EASYPAISA -->
+
+                    <div class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="payment"
+                            id="easypaisa"
+                            value="Easypaisa">
+
+                        <label
+                            for="easypaisa"
+                            class="payment-label">
+
+                            <span class="payment-radio"></span>
+
+                            <span class="payment-info">
+
+                                <span class="payment-name">
+                                    Easypaisa
+                                </span>
+
+                                <span class="payment-description">
+                                    Online payment gateway.
+                                </span>
+
+                            </span>
+
+                            <span class="payment-badge">
+                                EP
+                            </span>
+
+                        </label>
+
+                    </div>
+
+
+
+                    <!-- CARD -->
+
+                    <div class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="payment"
+                            id="card"
+                            value="Card">
+
+                        <label
+                            for="card"
+                            class="payment-label">
+
+                            <span class="payment-radio"></span>
+
+                            <span class="payment-info">
+
+                                <span class="payment-name">
+                                    Debit / Credit Card
+                                </span>
+
+                                <span class="payment-description">
+                                    Secure online card payment.
+                                </span>
+
+                            </span>
+
+                            <span class="payment-badge">
+                                CARD
+                            </span>
+
+                        </label>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div
+                    class="payment-notice"
+                    id="paymentNotice">
+
+                    Cash on Delivery selected.
+                    You will pay the courier when your order arrives.
+
+                </div>
+
+            </section>
+
+
         </div>
 
 
-        <div class="form-group">
-            <label for="phone">Phone Number</label>
 
-            <input
-                type="tel"
-                id="phone"
-                placeholder="03XX XXXXXXX"
-                autocomplete="tel"
-                required>
-        </div>
+        <!-- RIGHT -->
+
+        <aside class="order-summary">
 
 
-        <div class="form-group">
-            <label for="email">Email Address</label>
-
-            <input
-                type="email"
-                id="email"
-                placeholder="you@example.com"
-                autocomplete="email">
-        </div>
+            <div class="card-eyebrow">
+                03 · YOUR ORDER
+            </div>
 
 
-        <div class="form-group">
-            <label for="city">City</label>
-
-            <select id="city" required>
-
-                <option value="">Select city</option>
-                <option>Lahore</option>
-                <option>Karachi</option>
-                <option>Islamabad</option>
-                <option>Rawalpindi</option>
-                <option>Faisalabad</option>
-                <option>Multan</option>
-                <option>Gujranwala</option>
-                <option>Peshawar</option>
-                <option>Quetta</option>
-                <option>Sialkot</option>
-                <option>Bahawalpur</option>
-                <option>Burewala</option>
-                <option>Other</option>
-
-            </select>
-        </div>
+            <h2 class="summary-title">
+                Order Summary
+            </h2>
 
 
-        <div class="form-group full">
-
-            <label for="address">
-                Complete Delivery Address
-            </label>
-
-            <textarea
-                id="address"
-                placeholder="House / Flat number, street, area..."
-                required></textarea>
-
-        </div>
-
-    </div>
-
-</section>
+            <div
+                class="summary-items"
+                id="summaryItems">
+            </div>
 
 
-<section class="checkout-card">
+            <div class="summary-row">
 
-    <div class="card-eyebrow">
-        02 · PAYMENT
-    </div>
-
-    <h2 class="card-title">
-        Payment Method
-    </h2>
-
-
-    <div class="payment-options">
-
-        <div class="payment-option">
-
-            <input
-                type="radio"
-                name="payment"
-                id="cod"
-                value="COD"
-                checked>
-
-            <label for="cod" class="payment-label">
-
-                <span class="payment-radio"></span>
-
-                <span class="payment-info">
-
-                    <span class="payment-name">
-                        Cash on Delivery
-                    </span>
-
-                    <span class="payment-description">
-                        Pay when your fragrance arrives.
-                    </span>
-
+                <span>
+                    Items
                 </span>
 
-                <span class="payment-badge">
-                    COD
+                <span id="itemCount">
+                    0
                 </span>
 
-            </label>
-
-        </div>
+            </div>
 
 
-        <div class="payment-option">
+            <div class="summary-row">
 
-            <input
-                type="radio"
-                name="payment"
-                id="jazzcash"
-                value="JazzCash">
-
-            <label for="jazzcash" class="payment-label">
-
-                <span class="payment-radio"></span>
-
-                <span class="payment-info">
-
-                    <span class="payment-name">
-                        JazzCash
-                    </span>
-
-                    <span class="payment-description">
-                        Online payment gateway.
-                    </span>
-
+                <span>
+                    Subtotal
                 </span>
 
-                <span class="payment-badge">
-                    JC
+                <span id="subtotal">
+                    Rs. 0
                 </span>
 
-            </label>
-
-        </div>
+            </div>
 
 
-        <div class="payment-option">
+            <div class="summary-row">
 
-            <input
-                type="radio"
-                name="payment"
-                id="easypaisa"
-                value="Easypaisa">
-
-            <label for="easypaisa" class="payment-label">
-
-                <span class="payment-radio"></span>
-
-                <span class="payment-info">
-
-                    <span class="payment-name">
-                        Easypaisa
-                    </span>
-
-                    <span class="payment-description">
-                        Online payment gateway.
-                    </span>
-
+                <span>
+                    Delivery
                 </span>
 
-                <span class="payment-badge">
-                    EP
+                <span id="delivery">
+                    Rs. 250
                 </span>
 
-            </label>
-
-        </div>
+            </div>
 
 
-        <div class="payment-option">
+            <div class="summary-row total">
 
-            <input
-                type="radio"
-                name="payment"
-                id="card"
-                value="Card">
-
-            <label for="card" class="payment-label">
-
-                <span class="payment-radio"></span>
-
-                <span class="payment-info">
-
-                    <span class="payment-name">
-                        Debit / Credit Card
-                    </span>
-
-                    <span class="payment-description">
-                        Secure online card payment.
-                    </span>
-
+                <span>
+                    Total
                 </span>
 
-                <span class="payment-badge">
-                    CARD
+                <span id="total">
+                    Rs. 250
                 </span>
 
-            </label>
-
-        </div>
-
-    </div>
+            </div>
 
 
-    <div class="payment-notice" id="paymentNotice">
+            <button
+                class="place-order"
+                id="placeOrder">
 
-        Cash on Delivery selected. You will pay the courier when your order arrives.
+                Place Order
 
-    </div>
-
-</section>
-
-</div>
+            </button>
 
 
-<aside class="order-summary">
-
-    <div class="card-eyebrow">
-        03 · YOUR ORDER
-    </div>
-
-    <h2 class="summary-title">
-        Order Summary
-    </h2>
-
-    <div class="summary-items" id="summaryItems"></div>
+        </aside>
 
 
-    <div class="summary-row">
-
-        <span>Items</span>
-        <span id="itemCount">0</span>
-
-    </div>
-
-
-    <div class="summary-row">
-
-        <span>Subtotal</span>
-        <span id="subtotal">Rs. 0</span>
-
-    </div>
-
-
-    <div class="summary-row">
-
-        <span>Delivery</span>
-        <span id="delivery">Rs. 250</span>
-
-    </div>
-
-
-    <div class="summary-row total">
-
-        <span>Total</span>
-        <span id="total">Rs. 250</span>
-
-    </div>
-
-
-    <button
-        class="place-order"
-        id="placeOrder">
-
-        Place Order
-
-    </button>
-
-</aside>
-
-</section>
+    </section>
 
 </main>
 
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
 <footer>
 
@@ -968,16 +1462,35 @@ footer p{
         The Art of Presence.
     </div>
 
+
     <div class="footer-links">
 
-        <a href="index.html">Home</a>
-        <a href="shop.html">Shop</a>
-        <a href="about.html">Our Story</a>
-        <a href="contact.html">Contact</a>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms & Conditions</a>
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="shop.html">
+            Shop
+        </a>
+
+        <a href="about.html">
+            Our Story
+        </a>
+
+        <a href="contact.html">
+            Contact
+        </a>
+
+        <a href="privacy.html">
+            Privacy Policy
+        </a>
+
+        <a href="terms.html">
+            Terms & Conditions
+        </a>
 
     </div>
+
 
     <p>
         © 2026 NOIR FRAGRANCE. ALL RIGHTS RESERVED.
@@ -986,696 +1499,998 @@ footer p{
 </footer>
 
 
+
+<!-- =====================================================
+     FIREBASE + CHECKOUT JAVASCRIPT
+===================================================== -->
+
 <script type="module">
 
-/* =========================================================
-   FIREBASE
-========================================================= */
+    /* =====================================================
+       FIREBASE
+       
+       IMPORTANT:
+       There is NO anonymous authentication here.
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+       Customers do NOT need Gmail login.
 
-import {
-    getAuth,
-    signInAnonymously
-}
-from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+       Orders are saved directly into:
+       
+       Realtime Database
+       └── orders
+    ===================================================== */
 
-import {
-    getDatabase,
-    ref,
-    push
-}
-from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
-
-
-const firebaseConfig = {
-
-    apiKey:
-        "AIzaSyCCxNTzbQmMIHhi0BO0LpGbWcR4IWW7yQg",
-
-    authDomain:
-        "noirfragrance-7c5e5.firebaseapp.com",
-
-    databaseURL:
-        "https://noirfragrance-7c5e5-default-rtdb.asia-southeast1.firebasedatabase.app",
-
-    projectId:
-        "noirfragrance-7c5e5",
-
-    storageBucket:
-        "noirfragrance-7c5e5.firebasestorage.app",
-
-    messagingSenderId:
-        "162914791523",
-
-    appId:
-        "1:162914791523:web:ef39fe95d1f7312a71c856"
-
-};
+    import {
+        initializeApp
+    }
+    from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 
 
-const app = initializeApp(firebaseConfig);
-
-const auth = getAuth(app);
-
-const db = getDatabase(app);
-
-
-/* =========================================================
-   FIREBASE ANONYMOUS AUTHENTICATION
-========================================================= */
-
-let firebaseReady = false;
-
-try {
-
-    await signInAnonymously(auth);
-
-    firebaseReady = true;
-
-    console.log(
-        "NOIR Firebase authentication successful."
-    );
-
-}
-catch(error){
-
-    console.error(
-        "Firebase authentication error:",
-        error
-    );
-
-    alert(
-        "Order system could not connect to Firebase. Please refresh and try again."
-    );
-
-}
+    import {
+        getDatabase,
+        ref,
+        push
+    }
+    from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
 
 
-/* =========================================================
-   CART
-========================================================= */
+    const firebaseConfig = {
 
-let cart = [];
+        apiKey:
+            "AIzaSyCCxNTzbQmMIHhi0BO0LpGbWcR4IWW7yQg",
 
-try {
+        authDomain:
+            "noirfragrance-7c5e5.firebaseapp.com",
 
-    cart =
-        JSON.parse(
-            localStorage.getItem("noirCart") || "[]"
+        databaseURL:
+            "https://noirfragrance-7c5e5-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+        projectId:
+            "noirfragrance-7c5e5",
+
+        storageBucket:
+            "noirfragrance-7c5e5.firebasestorage.app",
+
+        messagingSenderId:
+            "162914791523",
+
+        appId:
+            "1:162914791523:web:ef39fe95d1f7312a71c856"
+
+    };
+
+
+    const app =
+        initializeApp(firebaseConfig);
+
+
+    const db =
+        getDatabase(app);
+
+
+
+    /* =====================================================
+       ELEMENTS
+    ===================================================== */
+
+    const checkoutLayout =
+        document.getElementById(
+            "checkoutLayout"
         );
 
-    if(!Array.isArray(cart)){
+
+    const emptyCheckout =
+        document.getElementById(
+            "emptyCheckout"
+        );
+
+
+    const summaryItems =
+        document.getElementById(
+            "summaryItems"
+        );
+
+
+    const itemCount =
+        document.getElementById(
+            "itemCount"
+        );
+
+
+    const subtotal =
+        document.getElementById(
+            "subtotal"
+        );
+
+
+    const delivery =
+        document.getElementById(
+            "delivery"
+        );
+
+
+    const total =
+        document.getElementById(
+            "total"
+        );
+
+
+    const cartCount =
+        document.getElementById(
+            "cartCount"
+        );
+
+
+    const placeOrder =
+        document.getElementById(
+            "placeOrder"
+        );
+
+
+    const paymentNotice =
+        document.getElementById(
+            "paymentNotice"
+        );
+
+
+    const menuButton =
+        document.getElementById(
+            "menuButton"
+        );
+
+
+    const navLinks =
+        document.getElementById(
+            "navLinks"
+        );
+
+
+    const DELIVERY_CHARGE = 250;
+
+
+
+    /* =====================================================
+       LOAD CART
+    ===================================================== */
+
+    let cart = [];
+
+
+    try {
+
+        cart = JSON.parse(
+            localStorage.getItem(
+                "noirCart"
+            ) || "[]"
+        );
+
+
+        if (!Array.isArray(cart)) {
+
+            cart = [];
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Cart loading error:",
+            error
+        );
+
         cart = [];
-    }
-
-}
-catch(error){
-
-    console.error(
-        "Cart loading error:",
-        error
-    );
-
-    cart = [];
-
-}
-
-
-/* =========================================================
-   ELEMENTS
-========================================================= */
-
-const checkoutLayout =
-    document.getElementById("checkoutLayout");
-
-const emptyCheckout =
-    document.getElementById("emptyCheckout");
-
-const summaryItems =
-    document.getElementById("summaryItems");
-
-const itemCount =
-    document.getElementById("itemCount");
-
-const subtotal =
-    document.getElementById("subtotal");
-
-const delivery =
-    document.getElementById("delivery");
-
-const total =
-    document.getElementById("total");
-
-const cartCount =
-    document.getElementById("cartCount");
-
-const placeOrder =
-    document.getElementById("placeOrder");
-
-const paymentNotice =
-    document.getElementById("paymentNotice");
-
-const DELIVERY_CHARGE = 250;
-
-
-/* =========================================================
-   PRICE FORMAT
-========================================================= */
-
-function formatPrice(price){
-
-    return "Rs. " +
-        Number(price || 0).toLocaleString();
-
-}
-
-
-/* =========================================================
-   RENDER CART
-========================================================= */
-
-function renderOrder(){
-
-    if(cart.length === 0){
-
-        checkoutLayout.style.display = "none";
-
-        emptyCheckout.style.display = "block";
-
-        cartCount.textContent = "(0)";
-
-        return;
 
     }
 
 
-    checkoutLayout.style.display = "grid";
 
-    emptyCheckout.style.display = "none";
+    /* =====================================================
+       PRICE FORMAT
+    ===================================================== */
 
-    summaryItems.innerHTML = "";
+    function formatPrice(price) {
 
+        return "Rs. " +
+            Number(
+                price || 0
+            ).toLocaleString();
 
-    let productsCount = 0;
+    }
 
-    let subtotalAmount = 0;
 
 
-    cart.forEach(item => {
+    /* =====================================================
+       RENDER ORDER
+    ===================================================== */
 
-        const quantity =
-            Number(item.quantity) || 1;
+    function renderOrder() {
 
-        const price =
-            Number(item.price) || 0;
+        if (cart.length === 0) {
 
+            checkoutLayout.style.display =
+                "none";
 
-        productsCount += quantity;
+            emptyCheckout.style.display =
+                "block";
 
-        subtotalAmount +=
-            price * quantity;
+            cartCount.textContent =
+                "(0)";
 
-
-        const element =
-            document.createElement("div");
-
-        element.className =
-            "summary-item";
-
-
-        const image =
-            document.createElement("img");
-
-        image.className =
-            "summary-image";
-
-        image.src =
-            item.image || "noir.png";
-
-        image.alt =
-            item.name || "NOIR Fragrance";
-
-
-        const info =
-            document.createElement("div");
-
-        info.className =
-            "summary-info";
-
-
-        const name =
-            document.createElement("div");
-
-        name.className =
-            "summary-name";
-
-        name.textContent =
-            item.name || "NOIR FRAGRANCE";
-
-
-        const size =
-            document.createElement("div");
-
-        size.className =
-            "summary-size";
-
-        size.textContent =
-            `${item.size || "50 ML"} × ${quantity}`;
-
-
-        const priceElement =
-            document.createElement("div");
-
-        priceElement.className =
-            "summary-price";
-
-        priceElement.textContent =
-            formatPrice(price * quantity);
-
-
-        info.appendChild(name);
-
-        info.appendChild(size);
-
-        info.appendChild(priceElement);
-
-        element.appendChild(image);
-
-        element.appendChild(info);
-
-        summaryItems.appendChild(element);
-
-    });
-
-
-    const totalAmount =
-        subtotalAmount + DELIVERY_CHARGE;
-
-
-    itemCount.textContent =
-        productsCount;
-
-
-    subtotal.textContent =
-        formatPrice(subtotalAmount);
-
-
-    delivery.textContent =
-        formatPrice(DELIVERY_CHARGE);
-
-
-    total.textContent =
-        formatPrice(totalAmount);
-
-
-    cartCount.textContent =
-        `(${productsCount})`;
-
-}
-
-
-renderOrder();
-
-
-/* =========================================================
-   PAYMENT METHOD DISPLAY
-========================================================= */
-
-document
-.querySelectorAll('input[name="payment"]')
-.forEach(radio => {
-
-    radio.addEventListener("change", () => {
-
-        if(radio.value === "COD"){
-
-            paymentNotice.textContent =
-                "Cash on Delivery selected. You will pay the courier when your order arrives.";
-
-        }
-        else if(radio.value === "JazzCash"){
-
-            paymentNotice.textContent =
-                "JazzCash payment gateway will be connected after the NOIR merchant account is activated.";
-
-        }
-        else if(radio.value === "Easypaisa"){
-
-            paymentNotice.textContent =
-                "Easypaisa payment gateway will be connected after the NOIR merchant account is activated.";
-
-        }
-        else if(radio.value === "Card"){
-
-            paymentNotice.textContent =
-                "Debit / Credit Card payment gateway will be connected after the NOIR merchant payment gateway is activated.";
+            return;
 
         }
 
-    });
 
-});
+        checkoutLayout.style.display =
+            "grid";
 
-
-/* =========================================================
-   PLACE ORDER
-========================================================= */
-
-placeOrder.addEventListener("click", async () => {
-
-    if(cart.length === 0){
-
-        alert(
-            "Your cart is empty."
-        );
-
-        return;
-
-    }
+        emptyCheckout.style.display =
+            "none";
 
 
-    if(!firebaseReady){
-
-        alert(
-            "The order system is not connected. Please refresh the page and try again."
-        );
-
-        return;
-
-    }
+        summaryItems.innerHTML =
+            "";
 
 
-    const name =
-        document
-        .getElementById("fullName")
-        .value
-        .trim();
+        let productsCount = 0;
+
+        let subtotalAmount = 0;
 
 
-    const phone =
-        document
-        .getElementById("phone")
-        .value
-        .trim();
-
-
-    const email =
-        document
-        .getElementById("email")
-        .value
-        .trim();
-
-
-    const city =
-        document
-        .getElementById("city")
-        .value;
-
-
-    const address =
-        document
-        .getElementById("address")
-        .value
-        .trim();
-
-
-    const paymentElement =
-        document.querySelector(
-            'input[name="payment"]:checked'
-        );
-
-
-    if(!name || !phone || !city || !address){
-
-        alert(
-            "Please complete your name, phone number, city and delivery address."
-        );
-
-        return;
-
-    }
-
-
-    if(!paymentElement){
-
-        alert(
-            "Please select a payment method."
-        );
-
-        return;
-
-    }
-
-
-    const payment =
-        paymentElement.value;
-
-
-    /*
-       Only COD is live at this stage.
-       Other payment gateways will be connected
-       separately using their official merchant APIs.
-    */
-
-    if(payment !== "COD"){
-
-        alert(
-            `${payment} is not connected yet. Please select Cash on Delivery for now.`
-        );
-
-        return;
-
-    }
-
-
-    let subtotalAmount = 0;
-
-
-    const cleanItems =
-        cart.map(item => {
+        cart.forEach(item => {
 
             const quantity =
-                Number(item.quantity) || 1;
+                Number(
+                    item.quantity
+                ) || 1;
+
 
             const price =
-                Number(item.price) || 0;
+                Number(
+                    item.price
+                ) || 0;
+
+
+            productsCount +=
+                quantity;
 
 
             subtotalAmount +=
                 price * quantity;
 
 
-            return {
 
-                name:
-                    item.name || "NOIR FRAGRANCE",
+            const element =
+                document.createElement(
+                    "div"
+                );
 
-                price:
-                    price,
 
-                quantity:
-                    quantity,
+            element.className =
+                "summary-item";
 
-                size:
-                    item.size || "50 ML",
 
-                image:
-                    item.image || "noir.png"
 
-            };
+            const image =
+                document.createElement(
+                    "img"
+                );
+
+
+            image.className =
+                "summary-image";
+
+
+            image.src =
+                item.image ||
+                "noir.png";
+
+
+            image.alt =
+                item.name ||
+                "NOIR Fragrance";
+
+
+            image.onerror =
+                function () {
+
+                    this.src =
+                        "noir.png";
+
+                };
+
+
+
+            const info =
+                document.createElement(
+                    "div"
+                );
+
+
+            info.className =
+                "summary-info";
+
+
+
+            const name =
+                document.createElement(
+                    "div"
+                );
+
+
+            name.className =
+                "summary-name";
+
+
+            name.textContent =
+                item.name ||
+                "NOIR FRAGRANCE";
+
+
+
+            const size =
+                document.createElement(
+                    "div"
+                );
+
+
+            size.className =
+                "summary-size";
+
+
+            size.textContent =
+                `${item.size || "50 ML"} × ${quantity}`;
+
+
+
+            const priceElement =
+                document.createElement(
+                    "div"
+                );
+
+
+            priceElement.className =
+                "summary-price";
+
+
+            priceElement.textContent =
+                formatPrice(
+                    price * quantity
+                );
+
+
+
+            info.appendChild(
+                name
+            );
+
+
+            info.appendChild(
+                size
+            );
+
+
+            info.appendChild(
+                priceElement
+            );
+
+
+            element.appendChild(
+                image
+            );
+
+
+            element.appendChild(
+                info
+            );
+
+
+            summaryItems.appendChild(
+                element
+            );
 
         });
 
 
-    const totalAmount =
-        subtotalAmount + DELIVERY_CHARGE;
+
+        const totalAmount =
+            subtotalAmount +
+            DELIVERY_CHARGE;
 
 
-    const order = {
 
-        orderId:
-            "NOIR-" +
-            Date.now()
-            .toString(),
-
-        customer: {
-
-            name:
-                name,
-
-            phone:
-                phone,
-
-            email:
-                email,
-
-            city:
-                city,
-
-            address:
-                address
-
-        },
-
-        paymentMethod:
-            payment,
-
-        items:
-            cleanItems,
-
-        subtotal:
-            subtotalAmount,
-
-        delivery:
-            DELIVERY_CHARGE,
-
-        total:
-            totalAmount,
-
-        status:
-            "Pending",
-
-        createdAt:
-            new Date().toISOString()
-
-    };
+        itemCount.textContent =
+            productsCount;
 
 
-    placeOrder.disabled = true;
-
-    placeOrder.textContent =
-        "Processing...";
-
-
-    try {
-
-        /*
-           THIS IS THE IMPORTANT PART.
-
-           The order is saved inside:
-
-           Realtime Database
-           └── orders
-               └── generated-order-id
-        */
-
-        const ordersRef =
-            ref(db, "orders");
-
-
-        const newOrderRef =
-            await push(
-                ordersRef,
-                order
+        subtotal.textContent =
+            formatPrice(
+                subtotalAmount
             );
 
 
-        console.log(
-            "Order saved successfully:",
-            newOrderRef.key
-        );
+        delivery.textContent =
+            formatPrice(
+                DELIVERY_CHARGE
+            );
 
 
-        /*
-           Save a copy locally so the
-           success page can display it.
-        */
+        total.textContent =
+            formatPrice(
+                totalAmount
+            );
 
-        localStorage.setItem(
-            "noirLastOrder",
-            JSON.stringify({
 
-                ...order,
+        cartCount.textContent =
+            `(${productsCount})`;
 
-                firebaseKey:
+    }
+
+
+    renderOrder();
+
+
+
+    /* =====================================================
+       PAYMENT METHOD DISPLAY
+    ===================================================== */
+
+    document
+        .querySelectorAll(
+            'input[name="payment"]'
+        )
+        .forEach(radio => {
+
+            radio.addEventListener(
+                "change",
+                () => {
+
+
+                    if (
+                        radio.value ===
+                        "COD"
+                    ) {
+
+                        paymentNotice.textContent =
+                            "Cash on Delivery selected. You will pay the courier when your order arrives.";
+
+                    }
+
+
+                    else if (
+                        radio.value ===
+                        "JazzCash"
+                    ) {
+
+                        paymentNotice.textContent =
+                            "JazzCash online payment will be connected after the NOIR merchant account is activated.";
+
+                    }
+
+
+                    else if (
+                        radio.value ===
+                        "Easypaisa"
+                    ) {
+
+                        paymentNotice.textContent =
+                            "Easypaisa online payment will be connected after the NOIR merchant account is activated.";
+
+                    }
+
+
+                    else if (
+                        radio.value ===
+                        "Card"
+                    ) {
+
+                        paymentNotice.textContent =
+                            "Debit / Credit Card payment will be connected after the NOIR merchant payment gateway is activated.";
+
+                    }
+
+                }
+            );
+
+        });
+
+
+
+    /* =====================================================
+       PLACE ORDER
+    ===================================================== */
+
+    placeOrder.addEventListener(
+        "click",
+        async () => {
+
+
+            /* ---------------------------------------------
+               CART CHECK
+            --------------------------------------------- */
+
+            if (
+                cart.length === 0
+            ) {
+
+                alert(
+                    "Your cart is empty."
+                );
+
+                return;
+
+            }
+
+
+
+            /* ---------------------------------------------
+               CUSTOMER INFORMATION
+            --------------------------------------------- */
+
+            const name =
+                document
+                    .getElementById(
+                        "fullName"
+                    )
+                    .value
+                    .trim();
+
+
+            const phone =
+                document
+                    .getElementById(
+                        "phone"
+                    )
+                    .value
+                    .trim();
+
+
+            const email =
+                document
+                    .getElementById(
+                        "email"
+                    )
+                    .value
+                    .trim();
+
+
+            const city =
+                document
+                    .getElementById(
+                        "city"
+                    )
+                    .value;
+
+
+            const address =
+                document
+                    .getElementById(
+                        "address"
+                    )
+                    .value
+                    .trim();
+
+
+
+            const paymentElement =
+                document.querySelector(
+                    'input[name="payment"]:checked'
+                );
+
+
+
+            /* ---------------------------------------------
+               VALIDATION
+            --------------------------------------------- */
+
+            if (!name) {
+
+                alert(
+                    "Please enter your full name."
+                );
+
+                document
+                    .getElementById(
+                        "fullName"
+                    )
+                    .focus();
+
+                return;
+
+            }
+
+
+
+            if (!phone) {
+
+                alert(
+                    "Please enter your phone number."
+                );
+
+                document
+                    .getElementById(
+                        "phone"
+                    )
+                    .focus();
+
+                return;
+
+            }
+
+
+
+            if (!city) {
+
+                alert(
+                    "Please select your city."
+                );
+
+                document
+                    .getElementById(
+                        "city"
+                    )
+                    .focus();
+
+                return;
+
+            }
+
+
+
+            if (!address) {
+
+                alert(
+                    "Please enter your complete delivery address."
+                );
+
+                document
+                    .getElementById(
+                        "address"
+                    )
+                    .focus();
+
+                return;
+
+            }
+
+
+
+            if (!paymentElement) {
+
+                alert(
+                    "Please select a payment method."
+                );
+
+                return;
+
+            }
+
+
+
+            const payment =
+                paymentElement.value;
+
+
+
+            /* ---------------------------------------------
+               ONLY COD IS CURRENTLY ACTIVE
+            --------------------------------------------- */
+
+            if (
+                payment !== "COD"
+            ) {
+
+                alert(
+                    `${payment} is not connected yet. Please select Cash on Delivery for now.`
+                );
+
+                return;
+
+            }
+
+
+
+            /* ---------------------------------------------
+               CALCULATE TOTAL
+            --------------------------------------------- */
+
+            let subtotalAmount =
+                0;
+
+
+            const cleanItems =
+                cart.map(item => {
+
+
+                    const quantity =
+                        Number(
+                            item.quantity
+                        ) || 1;
+
+
+                    const price =
+                        Number(
+                            item.price
+                        ) || 0;
+
+
+                    subtotalAmount +=
+                        price *
+                        quantity;
+
+
+
+                    return {
+
+                        name:
+                            item.name ||
+                            "NOIR FRAGRANCE",
+
+                        price:
+                            price,
+
+                        quantity:
+                            quantity,
+
+                        size:
+                            item.size ||
+                            "50 ML",
+
+                        image:
+                            item.image ||
+                            "noir.png"
+
+                    };
+
+                });
+
+
+
+            const totalAmount =
+                subtotalAmount +
+                DELIVERY_CHARGE;
+
+
+
+            /* ---------------------------------------------
+               CREATE ORDER
+            --------------------------------------------- */
+
+            const orderId =
+                "NOIR-" +
+                Date.now()
+                    .toString();
+
+
+
+            const order = {
+
+                orderId:
+                    orderId,
+
+
+                customer: {
+
+                    name:
+                        name,
+
+                    phone:
+                        phone,
+
+                    email:
+                        email,
+
+                    city:
+                        city,
+
+                    address:
+                        address
+
+                },
+
+
+                paymentMethod:
+                    payment,
+
+
+                items:
+                    cleanItems,
+
+
+                subtotal:
+                    subtotalAmount,
+
+
+                delivery:
+                    DELIVERY_CHARGE,
+
+
+                total:
+                    totalAmount,
+
+
+                status:
+                    "Pending",
+
+
+                createdAt:
+                    new Date()
+                        .toISOString()
+
+            };
+
+
+
+            /* ---------------------------------------------
+               BUTTON
+            --------------------------------------------- */
+
+            placeOrder.disabled =
+                true;
+
+
+            placeOrder.textContent =
+                "Processing...";
+
+
+
+            /* ---------------------------------------------
+               SAVE ORDER TO FIREBASE
+            --------------------------------------------- */
+
+            try {
+
+
+                const ordersRef =
+                    ref(
+                        db,
+                        "orders"
+                    );
+
+
+                const newOrderRef =
+                    await push(
+                        ordersRef,
+                        order
+                    );
+
+
+
+                console.log(
+                    "NOIR order saved:",
                     newOrderRef.key
-
-            })
-        );
+                );
 
 
-        /*
-           Clear cart after Firebase
-           confirms the order was saved.
-        */
 
-        localStorage.removeItem(
-            "noirCart"
-        );
+                /* -----------------------------------------
+                   SAVE LAST ORDER
+                ----------------------------------------- */
 
+                const savedOrder = {
 
-        /*
-           Go to confirmation page.
-        */
+                    ...order,
 
-        window.location.href =
-            "order-success.html";
+                    firebaseKey:
+                        newOrderRef.key
 
-    }
-    catch(error){
-
-        console.error(
-            "ORDER SAVE ERROR:",
-            error
-        );
+                };
 
 
-        placeOrder.disabled = false;
+                localStorage.setItem(
+                    "noirLastOrder",
 
-        placeOrder.textContent =
-            "Place Order";
-
-
-        alert(
-            "Your order could not be saved. Please try again."
-        );
-
-    }
-
-});
+                    JSON.stringify(
+                        savedOrder
+                    )
+                );
 
 
-/* =========================================================
-   MOBILE MENU
-========================================================= */
 
-const menuButton =
-    document.getElementById("menuButton");
+                /* -----------------------------------------
+                   CLEAR CART
+                ----------------------------------------- */
 
-const navLinks =
-    document.getElementById("navLinks");
-
-
-menuButton.addEventListener("click", () => {
-
-    navLinks.classList.toggle("active");
-
-    menuButton.textContent =
-        navLinks.classList.contains("active")
-        ? "✕"
-        : "☰";
-
-});
+                localStorage.removeItem(
+                    "noirCart"
+                );
 
 
-document
-.querySelectorAll(".nav-links a")
-.forEach(link => {
 
-    link.addEventListener("click", () => {
+                /* -----------------------------------------
+                   SUCCESS PAGE
+                ----------------------------------------- */
 
-        navLinks.classList.remove("active");
+                window.location.href =
+                    "order-success.html";
 
-        menuButton.textContent =
-            "☰";
+            }
 
-    });
 
-});
+
+            catch (error) {
+
+
+                console.error(
+                    "ORDER SAVE ERROR:",
+                    error
+                );
+
+
+                placeOrder.disabled =
+                    false;
+
+
+                placeOrder.textContent =
+                    "Place Order";
+
+
+                alert(
+                    "Your order could not be saved. Please check your internet connection and try again."
+                );
+
+            }
+
+        }
+    );
+
+
+
+    /* =====================================================
+       MOBILE MENU
+    ===================================================== */
+
+    menuButton.addEventListener(
+        "click",
+        () => {
+
+
+            navLinks.classList.toggle(
+                "active"
+            );
+
+
+            menuButton.textContent =
+                navLinks.classList.contains(
+                    "active"
+                )
+                ? "✕"
+                : "☰";
+
+        }
+    );
+
+
+
+    document
+        .querySelectorAll(
+            ".nav-links a"
+        )
+        .forEach(link => {
+
+
+            link.addEventListener(
+                "click",
+                () => {
+
+                    navLinks.classList.remove(
+                        "active"
+                    );
+
+
+                    menuButton.textContent =
+                        "☰";
+
+                }
+            );
+
+        });
 
 </script>
 
+
 </body>
+
 </html>
